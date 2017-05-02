@@ -1,0 +1,82 @@
+{
+  "name": "react-intersection-observer",
+  "version": "0.1.0",
+  "description": "Monitor if a component is inside the viewport, using IntersectionObserver API",
+  "main": "lib/index.js",
+  "browser": "lib/Observer.js",
+  "author": "Daniel Schmidt",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thebuilder/react-intersection-observer"
+  },
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "component",
+    "viewport",
+    "intersection",
+    "inview"
+  ],
+  "scripts": {
+    "build:lib": "rm -rf lib && NODE_ENV=development babel src --out-dir lib",
+    "build:storybook": "build-storybook --output-dir example",
+    "lint": "eslint src/.",
+    "precommit": "lint-staged",
+    "prepublish": "npm run build:lib",
+    "pretty": "prettier '{src,tests,stories}/**/*.js' --write --no-semi --single-quote --trailing-comma all",
+    "storybook": "start-storybook -p 9000",
+    "test": "eslint src/. && jest"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write --no-semi --single-quote --trailing-comma all",
+      "eslint",
+      "git add"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "react-app"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "insilico",
+      "prettier",
+      "prettier/react"
+    ]
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "snapshotSerializers": [
+      "<rootDir>/node_modules/enzyme-to-json/serializer"
+    ]
+  },
+  "dependencies": {
+    "react-intersection-observer": "0.2.0"
+  },
+  "peerDependencies": {
+    "prop-types": "^15.5.8",
+    "react": "^0.14.0 || ^15.0.0"
+  },
+  "devDependencies": {
+    "@kadira/storybook": "^2.21.0",
+    "babel-cli": "6.24.1",
+    "babel-core": "6.24.1",
+    "babel-jest": "19.0.0",
+    "babel-preset-react-app": "2.2.0",
+    "enzyme": "2.8.2",
+    "enzyme-to-json": "1.5.1",
+    "eslint": "3.19.0",
+    "eslint-config-insilico": "2.1.5",
+    "eslint-config-prettier": "1.7.0",
+    "husky": "0.13.3",
+    "jest": "19.0.2",
+    "lint-staged": "3.4.1",
+    "prettier": "1.2.2",
+    "prop-types": "15.5.8",
+    "react": "15.5.4",
+    "react-dom": "15.5.4",
+    "react-test-renderer": "15.5.4"
+  }
+}

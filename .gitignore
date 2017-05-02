@@ -1,0 +1,15 @@
+.vscode
+.cache
+node_modules
+reports
+example
+lib/
+nuget
+npm-debug.log*
+.DS_store
+.eslintcache
+.stylelintcache
+.idea
+.tern
+.tmp
+*.log
