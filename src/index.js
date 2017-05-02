@@ -59,6 +59,13 @@ class ScrollPercentage extends PureComponent {
     inView: false,
   }
 
+  componentWillUpdate(nextProps, nextState) {
+    if (!nextProps.onChange) return
+    if ((nextState.percentage !== this.state.percentage || nextState.inView !== this.state.inView)) {
+      nextProps.onChange({ ...this.state })
+    }
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (prevState.inView !== this.state.inView) {
       this.monitorScroll(this.state.inView)
@@ -82,9 +89,9 @@ class ScrollPercentage extends PureComponent {
   }
 
   handleChange = inView => {
-    if (this.props.onChange) this.props.onChange({ ...this.state })
     this.setState({ inView })
   }
+
   handleNode = node => (this.observer = node)
   handleScroll = () => requestAnimationFrame(() => this.updatePercentage())
 

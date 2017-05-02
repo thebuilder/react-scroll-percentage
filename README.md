@@ -32,6 +32,9 @@ or NPM:
 npm install react-scroll-percentage --save
 ```
 
+#### Note
+To optimize scroll updates, [requestAnimateFrame](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame) is used. Make sure your target browsers support it, or include the required polyfill.
+
 ## Props
 The **`<Observer />`** accepts the following props:
 
