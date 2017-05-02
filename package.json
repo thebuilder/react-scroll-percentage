@@ -1,13 +1,12 @@
 {
-  "name": "react-intersection-observer",
+  "name": "react-scroll-percentage",
   "version": "0.1.0",
-  "description": "Monitor if a component is inside the viewport, using IntersectionObserver API",
+  "description": "Monitor the scroll percentage of a component inside the viewport, using the IntersectionObserver API",
   "main": "lib/index.js",
-  "browser": "lib/Observer.js",
   "author": "Daniel Schmidt",
   "repository": {
     "type": "git",
-    "url": "https://github.com/thebuilder/react-intersection-observer"
+    "url": "https://github.com/thebuilder/react-scroll-percentage"
   },
   "license": "MIT",
   "keywords": [
@@ -15,6 +14,7 @@
     "component",
     "viewport",
     "intersection",
+    "scroll",
     "inview"
   ],
   "scripts": {
