@@ -61,7 +61,10 @@ class ScrollPercentage extends PureComponent {
 
   componentWillUpdate(nextProps, nextState) {
     if (!nextProps.onChange) return
-    if ((nextState.percentage !== this.state.percentage || nextState.inView !== this.state.inView)) {
+    if (
+      nextState.percentage !== this.state.percentage ||
+      nextState.inView !== this.state.inView
+    ) {
       nextProps.onChange({ ...this.state })
     }
   }
