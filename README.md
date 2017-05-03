@@ -1,5 +1,7 @@
 # react-scroll-percentage
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/thebuilder/react-scroll-percentage.svg)](https://greenkeeper.io/)
+
 [![Travis](https://travis-ci.org/thebuilder/react-scroll-percentage.svg?branch=master)](https://travis-ci.org/thebuilder/react-scroll-percentage)
 [![Dependency Status](https://david-dm.org/thebuilder/react-scroll-percentage.svg)](https://david-dm.org/thebuilder/react-scroll-percentage)
 [![npm](https://img.shields.io/npm/v/react-scroll-percentage.svg)](https://www.npmjs.com/package/react-scroll-percentage)
