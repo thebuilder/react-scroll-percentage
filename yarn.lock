@@ -55,7 +55,7 @@
     react-modal "^1.2.1"
     redux "^3.5.2"
 
-"@kadira/storybook@^2.21.0":
+"@kadira/storybook@^2.35.3":
   version "2.35.3"
   resolved "https://registry.yarnpkg.com/@kadira/storybook/-/storybook-2.35.3.tgz#8106195e1733623baf60db6adaa678dc29285d12"
   dependencies:
@@ -3133,7 +3133,7 @@ interpret@^1.0.0:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/interpret/-/interpret-1.0.3.tgz#cbc35c62eeee73f19ab7b10a801511401afc0f90"
 
-intersection-observer@0.2.1:
+intersection-observer@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/intersection-observer/-/intersection-observer-0.2.1.tgz#cb55175f4eebef6436d957a7d1774d39a9248e5e"
 
@@ -5118,11 +5118,11 @@ react-inspector@^1.1.0:
     babel-runtime "^6.9.2"
     is-dom "^1.0.5"
 
-react-intersection-observer@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/react-intersection-observer/-/react-intersection-observer-0.2.1.tgz#f74c68eee63c03f8e77d96b1bf2ed728fa54cf57"
+react-intersection-observer@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/react-intersection-observer/-/react-intersection-observer-0.2.2.tgz#b50efda2994a9dbdefa3295cd797321a1c0a740a"
   dependencies:
-    intersection-observer "0.2.1"
+    intersection-observer "^0.2.1"
 
 react-komposer@^1.9.0:
   version "1.13.1"

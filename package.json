@@ -53,14 +53,14 @@
     ]
   },
   "dependencies": {
-    "react-intersection-observer": "^0.2.1"
+    "react-intersection-observer": "^0.2.2"
   },
   "peerDependencies": {
     "prop-types": "^15.5.8",
     "react": "^0.14.0 || ^15.0.0"
   },
   "devDependencies": {
-    "@kadira/storybook": "^2.21.0",
+    "@kadira/storybook": "^2.35.3",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
     "babel-jest": "^19.0.0",
