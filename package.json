@@ -56,7 +56,7 @@
     ]
   },
   "dependencies": {
-    "react-intersection-observer": "^0.2.11"
+    "react-intersection-observer": "^0.3.0"
   },
   "peerDependencies": {
     "prop-types": "^15.5.10",
