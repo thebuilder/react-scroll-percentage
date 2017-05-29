@@ -34,7 +34,7 @@ npm install react-scroll-percentage --save
 ## Polyfills 
 
 ### intersection-observer
-The component requires the [intersection-observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) to be available on the global namespace. At the moment it is included in Chrome, Firefox, Opera and Edge. Make sure to include the polyfill to support other browsers like IE and Webkit.
+The component requires the [intersection-observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) to be available on the global namespace. At the moment you include the polyfill to support all browsers
 
 You can import the [polyfill](https://yarnpkg.com/en/package/intersection-observer) directly or use a service like [polyfill.io](https://polyfill.io/v2/docs/) that can add it when needed.
 
