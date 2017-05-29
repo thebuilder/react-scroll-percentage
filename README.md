@@ -31,8 +31,24 @@ or NPM:
 ```sh
 npm install react-scroll-percentage --save
 ```
+## Polyfills 
 
-#### Note
+### intersection-observer
+The component requires the [intersection-observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) to be available on the global namespace. At the moment it is included in Chrome, Firefox, Opera and Edge. Make sure to include the polyfill to support other browsers like IE and Webkit.
+
+You can import the [polyfill](https://yarnpkg.com/en/package/intersection-observer) directly or use a service like [polyfill.io](https://polyfill.io/v2/docs/) that can add it when needed.
+
+```sh
+yarn add intersection-observer
+```
+
+Then import it in your app
+
+```js
+import 'intersection-observer'
+```
+
+### requestAnimationFrame
 To optimize scroll updates, [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame) is used. Make sure your target browsers support it, or include the required polyfill.
 
 ## Props
