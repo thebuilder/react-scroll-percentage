@@ -1,7 +1,7 @@
 # react-scroll-percentage
 [![Greenkeeper badge](https://badges.greenkeeper.io/thebuilder/react-scroll-percentage.svg)](https://greenkeeper.io/)
 [![Travis](https://travis-ci.org/thebuilder/react-scroll-percentage.svg?branch=master)](https://travis-ci.org/thebuilder/react-scroll-percentage)
-[![Dependency Status](https://david-dm.org/thebuilder/react-scroll-percentage.svg)](https://david-dm.org/thebuilder/react-scroll-percentage)
+[![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![npm](https://img.shields.io/npm/v/react-scroll-percentage.svg)](https://www.npmjs.com/package/react-scroll-percentage)
 
 React component that reports the current scroll percentage of a element inside the viewport.
