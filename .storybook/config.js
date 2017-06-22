@@ -8,7 +8,7 @@ import './base.css'
 setOptions({
   name: pck.name,
   url: pck.repository ? pck.repository.url : null,
-  downPanel: false,
+  showDownPanel: false,
 })
 
 /**

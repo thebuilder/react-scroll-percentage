@@ -21,7 +21,9 @@ const Header = props =>
       ...props.style,
     }}
   >
-    <h2 style={{ marginTop: 0 }}>{`Threshold: ${props.threshold}%`}</h2>
+    {props.threshold
+      ? <h2 style={{ marginTop: 0 }}>{`Threshold: ${props.threshold}%`}</h2>
+      : null}
     <h3 style={{ marginBottom: 0 }}>{props.children}</h3>
   </div>
 
