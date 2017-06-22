@@ -39,8 +39,8 @@ class ScrollPercentage extends PureComponent {
 
   static calculatePercentage(height, bottom, threshold = 0) {
     const vh = ScrollPercentage.viewportHeight()
-    const offsetTop = threshold * vh * 0.5
-    const offsetBottom = threshold * vh * 0.5
+    const offsetTop = threshold * vh * 0.25
+    const offsetBottom = threshold * vh * 0.25
 
     return (
       1 -

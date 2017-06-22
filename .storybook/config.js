@@ -2,11 +2,13 @@ import React from 'react'
 import { configure } from '@storybook/react'
 import { setOptions } from '@storybook/addon-options'
 import pck from '../package.json'
+import 'intersection-observer'
 import './base.css'
 
 setOptions({
   name: pck.name,
   url: pck.repository ? pck.repository.url : null,
+  downPanel: false,
 })
 
 /**
