@@ -1,6 +1,6 @@
 {
   "name": "react-scroll-percentage",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Monitor the scroll percentage of a component inside the viewport, using the IntersectionObserver API.",
   "main": "lib/index.js",
   "module": "es/index.js",
