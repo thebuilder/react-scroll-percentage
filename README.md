@@ -34,7 +34,7 @@ npm install react-scroll-percentage --save
 ## Polyfills 
 
 ### intersection-observer
-The component requires the [intersection-observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) to be available on the global namespace. At the moment you include the polyfill to support all browsers
+The component requires the [intersection-observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) to be available on the global namespace. At the moment you should include a polyfill to ensure support in all browsers.
 
 You can import the [polyfill](https://yarnpkg.com/en/package/intersection-observer) directly or use a service like [polyfill.io](https://polyfill.io/v2/docs/) that can add it when needed.
 
@@ -42,17 +42,47 @@ You can import the [polyfill](https://yarnpkg.com/en/package/intersection-observ
 yarn add intersection-observer
 ```
 
-Then import it in your app
+Then import it in your app:
 
 ```js
 import 'intersection-observer'
+```
+
+If you are using Webpack (or similar) you could use [dynamic imports](https://webpack.js.org/api/module-methods/#import-), to load the Polyfill only if needed. 
+A basic implementation could look something like this:
+
+```js
+loadPolyfills()
+  .then(() => /* Render React application now that your Polyfills are ready */)
+
+/**
+* Do feature detection, to figure out which polyfills needs to be imported.
+**/
+function loadPolyfills() {
+  const polyfills = []
+
+  if (!supportsIntersectionObserver()) {
+    polyfills.push(import('intersection-observer'))
+  }
+
+  return Promise.all(polyfills)
+}
+
+function supportsIntersectionObserver() {
+  return (
+    'IntersectionObserver' in global &&
+    'IntersectionObserverEntry' in global &&
+    'intersectionRatio' in IntersectionObserverEntry.prototype
+  )
+}
+
 ```
 
 ### requestAnimationFrame
 To optimize scroll updates, [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame) is used. Make sure your target browsers support it, or include the required polyfill.
 
 ## Props
-The **`<Observer />`** accepts the following props:
+The **`<ScrollPercentage />`** accepts the following props:
 
 | Name             | Type      | Default           | Required | Description                                           |
 | ---------------- | --------- | ----------------- | -------- | ----------------------------------------------------- |
