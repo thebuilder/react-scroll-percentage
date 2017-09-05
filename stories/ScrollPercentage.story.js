@@ -24,7 +24,9 @@ const Header = props =>
     {props.threshold
       ? <h2 style={{ marginTop: 0 }}>{`Threshold: ${props.threshold}%`}</h2>
       : null}
-    <h3 style={{ marginBottom: 0 }}>{props.children}</h3>
+    <h3 style={{ marginBottom: 0 }}>
+      {props.children}
+    </h3>
   </div>
 
 storiesOf('Scroll Percentage', module)
@@ -75,7 +77,9 @@ storiesOf('Scroll Percentage', module)
   .add('onChange function', () =>
     <ScrollWrapper>
       <ScrollPercentage onChange={action('Scroll')}>
-        <Header>Scroll percentage dispatched to <em>onChange</em></Header>
+        <Header>
+          Scroll percentage dispatched to <em>onChange</em>
+        </Header>
       </ScrollPercentage>
     </ScrollWrapper>,
   )
