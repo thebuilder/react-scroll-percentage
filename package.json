@@ -39,42 +39,27 @@
       "git add"
     ]
   },
-  "babel": {
-    "presets": [
-      "env",
-      "react",
-      "stage-2"
-    ],
-    "env": {
-      "es": {
-        "presets": [
-          [
-            "env",
-            {
-              "modules": false
-            }
-          ],
-          "react",
-          "stage-2"
-        ]
-      }
-    }
-  },
   "eslintConfig": {
     "extends": [
-      "insilico",
-      "prettier",
-      "prettier/react"
+      "insilico"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "./.babelrc.js"
     ]
   },
   "jest": {
     "testEnvironment": "node",
     "snapshotSerializers": [
-      "<rootDir>/node_modules/enzyme-to-json/serializer"
+      "enzyme-to-json/serializer"
+    ],
+    "setupFiles": [
+      "<rootDir>/jest-setup.js"
     ]
   },
   "dependencies": {
-    "react-intersection-observer": "^1.0.0"
+    "react-intersection-observer": "^1.1.0"
   },
   "peerDependencies": {
     "prop-types": "^15.5.10 || ^16.0.0",
@@ -86,25 +71,25 @@
     "@storybook/react": "^3.2.8",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
-    "babel-eslint": "^7.2.3",
+    "babel-eslint": "^8.0.1",
     "babel-jest": "^21.0.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "concurrently": "^3.5.0",
-    "enzyme": "^2.9.1",
-    "enzyme-to-json": "^1.5.1",
+    "enzyme": "^3.0.0",
+    "enzyme-adapter-react-16": "^1.0.0",
+    "enzyme-to-json": "^3.0.1",
     "eslint": "^4.6.1",
     "eslint-config-insilico": "^5.0.0",
-    "eslint-config-prettier": "^2.4.0",
     "husky": "^0.14.3",
     "intersection-observer": "^0.4.2",
     "jest": "^21.0.1",
     "lint-staged": "^4.1.0",
     "prettier": "^1.6.1",
-    "prop-types": "^15.5.10",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
-    "react-test-renderer": "^15.6.1"
+    "prop-types": "^15.6.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-test-renderer": "^16.0.0"
   }
 }
