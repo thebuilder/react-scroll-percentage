@@ -1,10 +1,11 @@
+const ES = process.env.BABEL_ENV === 'es'
+
 module.exports = {
   presets: [
     [
       'env',
-      process.env.BABEL_ENV === 'es'
+      ES
         ? {
-            targets: { node: '7' },
             modules: false,
           }
         : {},

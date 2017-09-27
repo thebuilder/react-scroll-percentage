@@ -5947,8 +5947,8 @@ react-inspector@^2.1.6:
     is-dom "^1.0.9"
 
 react-intersection-observer@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/react-intersection-observer/-/react-intersection-observer-1.1.0.tgz#c94283456fc41886ca34d42d1b6012872f4a5e8f"
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-intersection-observer/-/react-intersection-observer-1.1.1.tgz#38b1b8ce9ff2cd804bb134a786e4b7a6ba0d1f5c"
 
 react-komposer@^1.9.0:
   version "1.13.1"
