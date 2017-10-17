@@ -60,7 +60,7 @@
   },
   "dependencies": {
     "prop-types": "^15.6.0",
-    "react-intersection-observer": "^1.1.0"
+    "react-intersection-observer": "^1.2.0"
   },
   "peerDependencies": {
     "react": ">=0.15.0"
@@ -87,7 +87,6 @@
     "jest": "^21.0.1",
     "lint-staged": "^4.1.0",
     "prettier": "^1.6.1",
-    "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-test-renderer": "^16.0.0"
