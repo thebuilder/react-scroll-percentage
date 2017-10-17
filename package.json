@@ -59,11 +59,11 @@
     ]
   },
   "dependencies": {
+    "prop-types": "^15.6.0",
     "react-intersection-observer": "^1.1.0"
   },
   "peerDependencies": {
-    "prop-types": "^15.5.10 || ^16.0.0",
-    "react": "^0.14.0 || ^15.0.0 || ^16.0.0"
+    "react": ">=0.15.0"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.2.6",
