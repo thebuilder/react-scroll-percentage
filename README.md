@@ -118,5 +118,5 @@ import ScrollPercentage from 'react-scroll-percentage'
   <h2>
     Plain children are always rendered. Use onChange to monitor state.
   </h2>
-</Observer>
+</ScrollPercentage>
 ```
