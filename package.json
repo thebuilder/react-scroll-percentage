@@ -60,7 +60,7 @@
   },
   "dependencies": {
     "prop-types": "^15.6.0",
-    "react-intersection-observer": "^1.2.0"
+    "react-intersection-observer": "^2.0.0"
   },
   "peerDependencies": {
     "react": ">=0.15.0"
