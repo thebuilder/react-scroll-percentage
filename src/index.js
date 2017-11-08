@@ -7,11 +7,11 @@ type Props = {
   /** Element tag to use for the wrapping */
   tag: string,
   /** Children should be either a function or a node */
-  children?: React.Node | ((percentage: number, inView: boolean) => React.Node),
+  children: React.Node | ((percentage: number, inView: boolean) => React.Node),
   /** Call this function whenever the percentage changes */
   onChange?: (percentage: number, inView: boolean) => void,
   /** Number between 0 and 1 indicating the the percentage that should be visible before triggering */
-  threshold: number,
+  threshold?: number,
 }
 
 type State = {
@@ -127,7 +127,7 @@ class ScrollPercentage extends React.PureComponent<Props, State> {
   }
 
   render() {
-    const { children, threshold, ...props } = this.props
+    const { children, threshold, onChange, ...props } = this.props
 
     return (
       <Observer ref={this.handleNode} {...props} onChange={this.handleInView}>

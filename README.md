@@ -105,7 +105,7 @@ The **`<ScrollPercentage />`** accepts the following props:
 
 | Name      | Type      | Default | Required | Description                                                                                   |
 | --------- | --------- | ------- | -------- | --------------------------------------------------------------------------------------------- |
-| tag       | String    |         | false    | Element tag to use for the wrapping component                                                 |
+| tag       | Node    |         | false    | Element tag to use for the wrapping component                                                 |
 | children  | func/node |         | false    | Children should be either a function or a node                                                |
 | threshold | Number    | 0       | false    | Number between 0 and 1 indicating the the percentage that should be visible before triggering |
 | onChange  | Func      |         | false    | Call this function whenever the in view state changes                                         |
