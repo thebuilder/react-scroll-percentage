@@ -7,7 +7,7 @@ import ScrollWrapper from './ScrollWrapper'
 
 const calcPercentage = percentage => Math.floor(percentage * 100)
 
-const Header = props =>
+const Header = props => (
   <div
     style={{
       display: 'flex',
@@ -21,65 +21,70 @@ const Header = props =>
       ...props.style,
     }}
   >
-    {props.threshold
-      ? <h2 style={{ marginTop: 0 }}>{`Threshold: ${props.threshold}%`}</h2>
-      : null}
-    <h3 style={{ marginBottom: 0 }}>
-      {props.children}
-    </h3>
+    {props.threshold ? (
+      <h2 style={{ marginTop: 0 }}>{`Threshold: ${props.threshold}%`}</h2>
+    ) : null}
+    <h3 style={{ marginBottom: 0 }}>{props.children}</h3>
   </div>
+)
 
 storiesOf('Scroll Percentage', module)
-  .add('Child as function', () =>
+  .add('Child as function', () => (
     <ScrollWrapper>
       <ScrollPercentage>
-        {({ percentage }) =>
+        {percentage => (
           <Header>{`Percentage scrolled: ${calcPercentage(
             percentage,
-          )}%.`}</Header>}
+          )}%.`}</Header>
+        )}
       </ScrollPercentage>
-    </ScrollWrapper>,
-  )
-  .add('With threshold', () =>
+    </ScrollWrapper>
+  ))
+  .add('With threshold', () => (
     <ScrollWrapper>
       <ScrollPercentage threshold={0}>
-        {({ percentage }) =>
+        {percentage => (
           <Header threshold="0">
             {`Percentage scrolled: ${calcPercentage(percentage)}%.`}
-          </Header>}
+          </Header>
+        )}
       </ScrollPercentage>
       <ScrollPercentage threshold={0.25}>
-        {({ percentage }) =>
+        {percentage => (
           <Header style={{ background: 'slategrey' }} threshold="25">
             {`Percentage scrolled: ${calcPercentage(percentage)}%.`}
-          </Header>}
+          </Header>
+        )}
       </ScrollPercentage>
       <ScrollPercentage threshold={0.5}>
-        {({ percentage }) =>
+        {percentage => (
           <Header style={{ background: 'plum' }} threshold="50">
             {`Percentage scrolled: ${calcPercentage(percentage)}%.`}
-          </Header>}
+          </Header>
+        )}
       </ScrollPercentage>
       <ScrollPercentage threshold={0.75}>
-        {({ percentage }) =>
+        {percentage => (
           <Header style={{ background: 'lightseagreen' }} threshold="75">
             {`Percentage scrolled: ${calcPercentage(percentage)}%.`}
-          </Header>}
+          </Header>
+        )}
       </ScrollPercentage>
       <ScrollPercentage threshold={1}>
-        {({ percentage }) =>
+        {percentage => (
           <Header style={{ background: 'cornflowerblue' }} threshold="100">
             {`Percentage scrolled: ${calcPercentage(percentage)}%.`}
-          </Header>}
+          </Header>
+        )}
       </ScrollPercentage>
-    </ScrollWrapper>,
-  )
-  .add('onChange function', () =>
+    </ScrollWrapper>
+  ))
+  .add('onChange function', () => (
     <ScrollWrapper>
       <ScrollPercentage onChange={action('Scroll')}>
         <Header>
           Scroll percentage dispatched to <em>onChange</em>
         </Header>
       </ScrollPercentage>
-    </ScrollWrapper>,
-  )
+    </ScrollWrapper>
+  ))

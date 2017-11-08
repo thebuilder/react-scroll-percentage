@@ -20,13 +20,13 @@
     "inview"
   ],
   "scripts": {
-    "build": "rm -rf lib && npm run build:lib && npm run build:es",
-    "build:es": "BABEL_ENV=es babel src --out-dir  es --ignore __*,*.story.js,*.test.js",
+    "build": "rm -rf lib && npm run build:lib && npm run build:flow",
     "build:lib": "babel src --out-dir lib --ignore __*,*.story.js,*.test.js",
     "build:storybook": "build-storybook --output-dir example",
+    "build:flow": "flow-copy-source -v src lib",
     "dev": "concurrently -k -r 'jest --watch' 'npm run storybook'",
     "lint": "eslint {src,stories,tests}/.",
-    "precommit": "lint-staged",
+    "precommit": "flow && lint-staged",
     "prepublish": "npm run build",
     "pretty": "prettier '{src,tests,stories}/**/*.js' --write --no-semi --single-quote --trailing-comma all",
     "storybook": "start-storybook -p 9000",
@@ -59,11 +59,10 @@
     ]
   },
   "dependencies": {
-    "prop-types": "^15.6.0",
     "react-intersection-observer": "^2.0.0"
   },
   "peerDependencies": {
-    "react": ">=0.15.0"
+    "react": "^15.0.0 || ^16.0.0"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.2.6",
@@ -82,6 +81,8 @@
     "enzyme-to-json": "^3.0.1",
     "eslint": "^4.6.1",
     "eslint-config-insilico": "^5.0.0",
+    "flow-bin": "^0.57.3",
+    "flow-copy-source": "^1.2.1",
     "husky": "^0.14.3",
     "intersection-observer": "^0.4.2",
     "jest": "^21.0.1",

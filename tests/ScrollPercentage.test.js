@@ -14,11 +14,7 @@ afterEach(() => {
 
 it('Should render <ScrollPercentage />', () => {
   const callback = jest.fn()
-  shallow(
-    <ScrollPercentage>
-      {callback}
-    </ScrollPercentage>,
-  )
+  shallow(<ScrollPercentage>{callback}</ScrollPercentage>)
   expect(callback).toHaveBeenCalled()
 })
 
