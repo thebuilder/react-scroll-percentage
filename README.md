@@ -115,7 +115,7 @@ The **`<ScrollPercentage />`** accepts the following props:
 ### Child as function
 
 The basic usage pass a function as the child. It will be called whenever the
-state changes, with an object containing `inView` and `percentage`.
+state changes, with the current value of `percentage` and `inView`.
 
 ```js
 import ScrollPercentage from 'react-scroll-percentage'
