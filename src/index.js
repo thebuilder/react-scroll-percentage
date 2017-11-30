@@ -12,6 +12,10 @@ type Props = {
   onChange?: (percentage: number, inView: boolean) => void,
   /** Number between 0 and 1 indicating the the percentage that should be visible before triggering */
   threshold?: number,
+  /** Custom calculation method - Receives the current bounds and threshold value, should return the percentage between 0 and 1 */
+  calculatePercentage?: (bounds: ClientRect, threshold?: number) => number,
+  /** Get a reference to the the inner DOM node */
+  innerRef?: (element: ?HTMLElement) => void,
 }
 
 type State = {
@@ -42,8 +46,7 @@ class ScrollPercentage extends React.PureComponent<Props, State> {
   }
 
   static calculatePercentage(
-    height: number,
-    bottom: number,
+    bounds: ClientRect,
     threshold: number = 0,
   ): number {
     const vh = ScrollPercentage.viewportHeight()
@@ -56,7 +59,8 @@ class ScrollPercentage extends React.PureComponent<Props, State> {
         0,
         Math.min(
           1,
-          (bottom - offsetTop) / (vh + height - offsetBottom - offsetTop),
+          (bounds.bottom - offsetTop) /
+            (vh + bounds.height - offsetBottom - offsetTop),
         ),
       )
     )
@@ -65,6 +69,11 @@ class ScrollPercentage extends React.PureComponent<Props, State> {
   state = {
     percentage: 0,
     inView: false,
+  }
+
+  componentDidMount() {
+    // Start by updating the scroll position, so it correctly reflects the elements start position
+    this.handleScroll()
   }
 
   componentWillUpdate(nextProps: Props, nextState: State) {
@@ -77,11 +86,6 @@ class ScrollPercentage extends React.PureComponent<Props, State> {
     }
   }
 
-  componentDidMount() {
-    // Start by updating the scroll position, so it correctly reflects the elements start position
-    this.handleScroll()
-  }
-
   componentDidUpdate(prevProps: Props, prevState: State) {
     if (prevState.inView !== this.state.inView) {
       this.monitorScroll(this.state.inView)
@@ -90,10 +94,9 @@ class ScrollPercentage extends React.PureComponent<Props, State> {
 
   componentWillUnmount() {
     this.monitorScroll(false)
-    this.observer = null
   }
 
-  observer: ?Observer = null
+  node: ?HTMLElement = null
 
   monitorScroll(enable: boolean) {
     if (enable) {
@@ -107,17 +110,15 @@ class ScrollPercentage extends React.PureComponent<Props, State> {
     this.setState({ inView })
   }
 
-  handleNode = (node: ?Observer) => (this.observer = node)
+  handleNode = (observer: ?Observer) => (this.node = observer && observer.node)
 
   handleScroll = () => {
-    if (!this.observer || !this.observer.node) return
-    const { threshold } = this.props
-    const { bottom, height } = this.observer.node.getBoundingClientRect()
-    const percentage = ScrollPercentage.calculatePercentage(
-      height,
-      bottom,
-      threshold,
-    )
+    if (!this.node) return
+    const { threshold, calculatePercentage } = this.props
+    const bounds = this.node.getBoundingClientRect()
+    const percentage = calculatePercentage
+      ? calculatePercentage(bounds, threshold)
+      : ScrollPercentage.calculatePercentage(bounds, threshold)
 
     if (percentage !== this.state.percentage) {
       this.setState({

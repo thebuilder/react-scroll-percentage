@@ -6,9 +6,9 @@
 [![npm](https://img.shields.io/npm/v/react-scroll-percentage.svg)](https://www.npmjs.com/package/react-scroll-percentage)
 
 React component that reports the current scroll percentage of a element inside
-the viewport. It uses
-[React Intersection Observer](https://github.com/thebuilder/react-intersection-observer)
-to only report the percentage when the element is inside the viewport.
+the viewport. It uses [React Intersection
+Observer](https://github.com/thebuilder/react-intersection-observer) to only
+report the percentage when the element is inside the viewport.
 
 ```js
 import ScrollPercentage from 'react-scroll-percentage'
@@ -42,8 +42,8 @@ npm install react-scroll-percentage --save
 
 ### intersection-observer
 
-The component requires the
-[intersection-observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)
+The component requires the [intersection-observer
+API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)
 to be available on the global namespace. At the moment you should include a
 polyfill to ensure support in all browsers.
 
@@ -62,10 +62,9 @@ Then import it in your app:
 import 'intersection-observer'
 ```
 
-If you are using Webpack (or similar) you could use
-[dynamic imports](https://webpack.js.org/api/module-methods/#import-), to load
-the Polyfill only if needed. A basic implementation could look something like
-this:
+If you are using Webpack (or similar) you could use [dynamic
+imports](https://webpack.js.org/api/module-methods/#import-), to load the
+Polyfill only if needed. A basic implementation could look something like this:
 
 ```js
 loadPolyfills()
@@ -104,12 +103,14 @@ polyfill.
 
 The **`<ScrollPercentage />`** accepts the following props:
 
-| Name      | Type      | Default | Required | Description                                                                                   |
-| --------- | --------- | ------- | -------- | --------------------------------------------------------------------------------------------- |
-| tag       | Node      |         | false    | Element tag to use for the wrapping component                                                 |
-| children  | func/node |         | false    | Children should be either a function or a node                                                |
-| threshold | Number    | 0       | false    | Number between 0 and 1 indicating the the percentage that should be visible before triggering |
-| onChange  | Func      |         | false    | Call this function whenever the in view state changes                                         |
+| Name                | Type                                               | Default | Required | Description                                                                                                               |
+| ------------------- | -------------------------------------------------- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------- |
+| tag                 | Node                                               | 'div'   | true    | Element tag to use for the wrapping component                                                                             |
+| children            | ((percentage: number, inView: boolean) => Node)    |         | true    | Children should be either a function or a node                                                                            |
+| threshold           | Number                                             | 0       | false    | Number between 0 and 1 indicating the the percentage that should be visible before triggering                             |
+| onChange            | (percentage: number, inView: boolean) => void      |         | false    | Call this function whenever the in view state changes                                                                     |
+| calculatePercentage | (bounds: ClientRect, threshold?: number) => number |         | false    | Custom calculation method - Receives the current bounds and threshold value, should return the percentage between 0 and 1 |
+| innerRef            | (element: ?HTMLElement) => void                    |         | false    | Get a reference to the the inner DOM node                                                                                 |
 
 ## Example code
 

@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 const style = {
   height: '101vh',
@@ -27,10 +26,6 @@ function ScrollWrapper({ children, ...props }) {
       </section>
     </div>
   )
-}
-
-ScrollWrapper.propTypes = {
-  children: PropTypes.node,
 }
 
 export default ScrollWrapper

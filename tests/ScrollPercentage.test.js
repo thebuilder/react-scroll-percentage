@@ -27,11 +27,17 @@ it('Should render with child', () => {
 })
 
 it('Should return a percentage', () => {
-  expect(ScrollPercentage.calculatePercentage(250, 0)).toEqual(1)
-  expect(ScrollPercentage.calculatePercentage(250, 1050)).toEqual(0)
+  expect(
+    ScrollPercentage.calculatePercentage({ height: 250, bottom: 0 }),
+  ).toEqual(1)
+  expect(
+    ScrollPercentage.calculatePercentage({ height: 250, bottom: 1050 }),
+  ).toEqual(0)
 })
 
 it('Should handle threshold', () => {
   // 525 is half of 1050 - the full bottom size
-  expect(ScrollPercentage.calculatePercentage(250, 525, 0.1)).toEqual(0.5)
+  expect(
+    ScrollPercentage.calculatePercentage({ height: 250, bottom: 525 }, 0.1),
+  ).toEqual(0.5)
 })
