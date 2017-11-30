@@ -17,7 +17,7 @@ function update() {
 
 function start() {
   if (!isMonitoring) {
-    global.window.addEventListener('scroll', onScroll)
+    window.addEventListener('scroll', onScroll)
     isMonitoring = true
   }
 }
@@ -25,7 +25,7 @@ function start() {
 function stop() {
   if (isMonitoring) {
     watchers.clear()
-    global.window.removeEventListener('scroll', onScroll)
+    window.removeEventListener('scroll', onScroll)
     isMonitoring = false
   }
 }
@@ -38,4 +38,8 @@ export function watch(cb: Function) {
 export function unwatch(cb: Function) {
   watchers.delete(cb)
   if (!watchers.size) stop()
+}
+
+export function destroy() {
+  stop()
 }
