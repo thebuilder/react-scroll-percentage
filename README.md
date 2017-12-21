@@ -109,7 +109,6 @@ The **`<ScrollPercentage />`** accepts the following props:
 | children            | ((percentage: number, inView: boolean) => Node)    |         | true    | Children should be either a function or a node                                                                            |
 | threshold           | Number                                             | 0       | false    | Number between 0 and 1 indicating the the percentage that should be visible before triggering                             |
 | onChange            | (percentage: number, inView: boolean) => void      |         | false    | Call this function whenever the in view state changes                                                                     |
-| calculatePercentage | (bounds: ClientRect, threshold?: number) => number |         | false    | Custom calculation method - Receives the current bounds and threshold value, should return the percentage between 0 and 1 |
 | innerRef            | (element: ?HTMLElement) => void                    |         | false    | Get a reference to the the inner DOM node                                                                                 |
 
 ## Example code

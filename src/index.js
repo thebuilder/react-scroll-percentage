@@ -12,8 +12,6 @@ type Props = {
   onChange?: (percentage: number, inView: boolean) => void,
   /** Number between 0 and 1 indicating the the percentage that should be visible before triggering */
   threshold?: number,
-  /** Custom calculation method - Receives the current bounds and threshold value, should return the percentage between 0 and 1 */
-  calculatePercentage?: (bounds: ClientRect, threshold?: number) => number,
   /** Get a reference to the the inner DOM node */
   innerRef?: (element: ?HTMLElement) => void,
 }
@@ -114,11 +112,9 @@ class ScrollPercentage extends React.PureComponent<Props, State> {
 
   handleScroll = () => {
     if (!this.node) return
-    const { threshold, calculatePercentage } = this.props
+    const { threshold } = this.props
     const bounds = this.node.getBoundingClientRect()
-    const percentage = calculatePercentage
-      ? calculatePercentage(bounds, threshold)
-      : ScrollPercentage.calculatePercentage(bounds, threshold)
+    const percentage = ScrollPercentage.calculatePercentage(bounds, threshold)
 
     if (percentage !== this.state.percentage) {
       this.setState({
