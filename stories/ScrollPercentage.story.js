@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
@@ -35,6 +36,17 @@ storiesOf('Scroll Percentage', module)
           <Header>{`Percentage scrolled: ${calcPercentage(
             percentage,
           )}%.`}</Header>
+        )}
+      </ScrollPercentage>
+    </ScrollWrapper>
+  ))
+  .add('Taller then viewport', () => (
+    <ScrollWrapper>
+      <ScrollPercentage>
+        {percentage => (
+          <Header
+            style={{ height: '150vh' }}
+          >{`Percentage scrolled: ${calcPercentage(percentage)}%.`}</Header>
         )}
       </ScrollPercentage>
     </ScrollWrapper>
