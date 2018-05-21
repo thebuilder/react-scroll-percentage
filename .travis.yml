@@ -3,7 +3,7 @@ node_js:
   - "9"
 cache: yarn
 script:
-  - yarn test
+  - yarn test --coverage
   - yarn flow
   - yarn build:storybook
 deploy:
