@@ -16,8 +16,14 @@ npm-debug.log
 .project
 .tmp
 .eslintignore
-yarn.lock
-stories
+.flowconfig
+.travis.yml
+.babelrc.js
+.editorconfig
 .storybook
+yarn.lock
+coverage
+stories
 tests
 example
+jest-setup.js
