@@ -1,8 +1,14 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount } from 'enzyme'
 import ScrollPercentage from '../src/index.js'
 
-jest.mock('react-intersection-observer')
+jest.mock('invariant')
+
+global.IntersectionObserver = jest.fn(() => ({
+  observe: jest.fn(),
+  unobserve: jest.fn(),
+  disconnect: jest.fn(),
+}))
 
 beforeEach(() => {
   global.innerHeight = 800
@@ -12,18 +18,34 @@ afterEach(() => {
   global.innerHeight = 800
 })
 
+const plainChild = () => <div>inner</div>
+
 it('Should render <ScrollPercentage />', () => {
-  const callback = jest.fn()
-  shallow(<ScrollPercentage>{callback}</ScrollPercentage>)
-  expect(callback).toHaveBeenCalled()
+  const callback = jest.fn(plainChild)
+  const wrapper = mount(<ScrollPercentage>{callback}</ScrollPercentage>)
+  expect(callback).toHaveBeenLastCalledWith(
+    expect.objectContaining({ inView: false }),
+  )
+  expect(wrapper).toMatchSnapshot()
+})
+
+it('Should render <ScrollPercentage /> with custom tag', () => {
+  const callback = jest.fn(plainChild)
+  const wrapper = mount(
+    <ScrollPercentage tag="span" className="wrapperClass">
+      {callback}
+    </ScrollPercentage>,
+  )
+  expect(wrapper).toMatchSnapshot()
 })
 
 it('Should render with child', () => {
-  shallow(
+  const wrapper = mount(
     <ScrollPercentage>
-      <div />
+      <div>Inner</div>
     </ScrollPercentage>,
   )
+  expect(wrapper).toMatchSnapshot()
 })
 
 it('Should return a percentage', () => {

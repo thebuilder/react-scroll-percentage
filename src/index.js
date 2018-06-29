@@ -2,16 +2,27 @@
 import * as React from 'react' // eslint-disable-line no-unused-vars
 import Observer from 'react-intersection-observer'
 import { unwatch, watch } from './scroll'
+import invariant from 'invariant'
+
+type InnerCallback = {
+  inView: boolean,
+  ref: (node: ?HTMLElement) => void,
+}
 
 type Props = {
-  /** Element tag to use for the wrapping */
-  tag: string,
   /** Children should be either a function or a node */
-  children: React.Node | ((percentage: number, inView: boolean) => React.Node),
+  children:
+    | React.Node
+    | (({
+        percentage: number,
+        inView: boolean,
+      }) => React.Node),
   /** Call this function whenever the percentage changes */
   onChange?: (percentage: number, inView: boolean) => void,
   /** Number between 0 and 1 indicating the the percentage that should be visible before triggering */
   threshold?: number,
+  /** Element to use for wrapping element. Defaults to a `<div>` */
+  tag?: string,
   /** Get a reference to the the inner DOM node */
   innerRef?: (element: ?HTMLElement) => void,
 }
@@ -72,19 +83,24 @@ class ScrollPercentage extends React.PureComponent<Props, State> {
   componentDidMount() {
     // Start by updating the scroll position, so it correctly reflects the elements start position
     this.handleScroll()
-  }
 
-  componentWillUpdate(nextProps: Props, nextState: State) {
-    if (!nextProps.onChange) return
-    if (
-      nextState.percentage !== this.state.percentage ||
-      nextState.inView !== this.state.inView
-    ) {
-      nextProps.onChange(nextState.percentage, nextState.inView)
+    if (process.env.NODE_ENV !== 'production') {
+      invariant(
+        this.node,
+        `react-scroll-percentage: No DOM node found. Make sure you forward "ref" to the root DOM element you want to observe, when using render prop.`,
+      )
     }
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
+    if (
+      this.props.onChange &&
+      (prevState.percentage !== this.state.percentage ||
+        prevState.inView !== this.state.inView)
+    ) {
+      this.props.onChange(this.state.percentage, this.state.inView)
+    }
+
     if (prevState.inView !== this.state.inView) {
       this.monitorScroll(this.state.inView)
     }
@@ -123,14 +139,42 @@ class ScrollPercentage extends React.PureComponent<Props, State> {
     }
   }
 
-  render() {
-    const { children, threshold, onChange, ...props } = this.props
+  renderInner = ({ inView, ref }: InnerCallback) => {
+    const {
+      children,
+      onChange,
+      threshold,
+      innerRef,
+      tag,
+      ...props
+    } = this.props
 
+    // Create a wrapping element
+    return React.createElement(
+      tag || 'div',
+      {
+        ref: innerRef
+          ? node => {
+              innerRef(node)
+              ref(node)
+            }
+          : ref,
+        ...props,
+      },
+      typeof children === 'function'
+        ? children({ percentage: this.state.percentage, inView })
+        : children,
+    )
+  }
+
+  render() {
     return (
-      <Observer ref={this.handleNode} {...props} onChange={this.handleInView}>
-        {children && typeof children === 'function'
-          ? children(this.state.percentage, this.state.inView)
-          : children}
+      <Observer
+        onChange={this.handleInView}
+        threshold={this.props.threshold}
+        ref={this.handleNode}
+      >
+        {this.renderInner}
       </Observer>
     )
   }

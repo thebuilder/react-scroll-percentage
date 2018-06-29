@@ -38,18 +38,65 @@ or NPM:
 npm install react-scroll-percentage --save
 ```
 
+## Props
+
+The **`<ScrollPercentage />`** accepts the following props:
+
+| Name      | Type                                            | Default | Required | Description                                                                                   |
+| --------- | ----------------------------------------------- | ------- | -------- | --------------------------------------------------------------------------------------------- |
+| tag       | Node                                            | 'div'   | true     | Element tag to use for the wrapping component                                                 |
+| children  | ((percentage: number, inView: boolean) => Node) |         | true     | Children should be either a function or a node                                                |
+| threshold | Number                                          | 0       | false    | Number between 0 and 1 indicating the the percentage that should be visible before triggering |
+| onChange  | (percentage: number, inView: boolean) => void   |         | false    | Call this function whenever the in view state changes                                         |
+| innerRef  | (element: ?HTMLElement) => void                 |         | false    | Get a reference to the the inner DOM node                                                     |
+
+## Example code
+
+### Render prop
+
+The basic usage pass a function as the child. It will be called whenever the
+state changes, with the current value of `percentage` and `inView`.
+
+> Note that <ScrollPercentage> will still render a wrapping element (default is a `<div>`).
+> You can change to element by setting `tag`, and any excess props like `className` will be passed to the element
+
+```js
+import ScrollPercentage from 'react-scroll-percentage'
+
+<ScrollPercentage>
+  {(percentage, inView ) => (
+    <h2>{`Percentage scrolled: ${percentage.toPrecision(2)}%.`}</h2>
+  )}
+</ScrollPercentage>
+```
+
+### OnChange callback
+
+You can monitor the onChange method, and control the state in your own
+component. The child node will always be rendered.
+
+```js
+import ScrollPercentage from 'react-scroll-percentage'
+
+<ScrollPercentage onChange={(percentage, inView) => console.log(percentage, inView)}>
+  <h2>
+    Plain children are always rendered. Use onChange to monitor state.
+  </h2>
+</ScrollPercentage>
+```
+
 ## Polyfills
 
-### intersection-observer
+### Intersection Observer
 
-The component requires the [intersection-observer
-API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)
-to be available on the global namespace. At the moment you should include a
-polyfill to ensure support in all browsers.
+[Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)
+is the API is used to determine if an element is inside the viewport or not. Browser support is pretty good, but Safari is still missing support.
+
+> [Can i use intersectionobserver?](https://caniuse.com/#feat=intersectionobserver)
 
 You can import the
-[polyfill](https://yarnpkg.com/en/package/intersection-observer) directly or use
-a service like [polyfill.io](https://polyfill.io/v2/docs/) that can add it when
+[polyfill](https://www.npmjs.com/package/react-intersection-observer) directly or use
+a service like [polyfill.io](https://polyfill.io/v2/docs/) to add it when
 needed.
 
 ```sh
@@ -98,47 +145,3 @@ To optimize scroll updates,
 [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame)
 is used. Make sure your target browsers support it, or include the required
 polyfill.
-
-## Props
-
-The **`<ScrollPercentage />`** accepts the following props:
-
-| Name      | Type                                            | Default | Required | Description                                                                                   |
-| --------- | ----------------------------------------------- | ------- | -------- | --------------------------------------------------------------------------------------------- |
-| tag       | Node                                            | 'div'   | true     | Element tag to use for the wrapping component                                                 |
-| children  | ((percentage: number, inView: boolean) => Node) |         | true     | Children should be either a function or a node                                                |
-| threshold | Number                                          | 0       | false    | Number between 0 and 1 indicating the the percentage that should be visible before triggering |
-| onChange  | (percentage: number, inView: boolean) => void   |         | false    | Call this function whenever the in view state changes                                         |
-| innerRef  | (element: ?HTMLElement) => void                 |         | false    | Get a reference to the the inner DOM node                                                     |
-
-## Example code
-
-### Child as function
-
-The basic usage pass a function as the child. It will be called whenever the
-state changes, with the current value of `percentage` and `inView`.
-
-```js
-import ScrollPercentage from 'react-scroll-percentage'
-
-<ScrollPercentage>
-  {(percentage, inView ) => (
-    <h2>{`Percentage scrolled: ${percentage.toPrecision(2)}%.`}</h2>
-  )}
-</ScrollPercentage>
-```
-
-### OnChange callback
-
-You can monitor the onChange method, and control the state in your own
-component. The child node will always be rendered.
-
-```js
-import ScrollPercentage from 'react-scroll-percentage'
-
-<ScrollPercentage onChange={(percentage, inView) => console.log(percentage, inView)}>
-  <h2>
-    Plain children are always rendered. Use onChange to monitor state.
-  </h2>
-</ScrollPercentage>
-```
