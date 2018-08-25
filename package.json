@@ -94,7 +94,7 @@
     "babel-runtime": "^6.26.0",
     "concurrently": "^3.6.0",
     "enzyme": "^3.4.4",
-    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-adapter-react-16": "^1.2.0",
     "enzyme-to-json": "^3.3.4",
     "eslint": "^5.0.1",
     "eslint-config-insilico": "^5.2.0",
