@@ -12,13 +12,9 @@ const umd = format === 'umd'
 const cjs = format === 'cjs'
 
 let output
-let targets = {}
 
 if (es) {
   output = { file: pkg.module, format: 'es' }
-  targets = {
-    node: true,
-  }
 } else if (umd) {
   if (minify) {
     output = {
@@ -66,7 +62,6 @@ export default [
             '@babel/preset-env',
             {
               loose: true,
-              targets,
             },
           ],
         ],
