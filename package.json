@@ -80,7 +80,7 @@
     "react": "^15.0.0 || ^16.0.0"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^3.4.8",
+    "@storybook/addon-actions": "^4.0.0",
     "@storybook/addon-options": "^3.4.8",
     "@storybook/react": "^3.4.8",
     "babel-cli": "^6.26.0",
