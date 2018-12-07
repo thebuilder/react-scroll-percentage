@@ -12,9 +12,8 @@ report the percentage when the element is inside the viewport.
 
 ```js
 import ScrollPercentage from 'react-scroll-percentage'
-
-<ScrollPercentage>
-  {( percentage ) => (
+;<ScrollPercentage>
+  {percentage => (
     <h2>{`Percentage scrolled: ${percentage.toPrecision(2)}%.`}</h2>
   )}
 </ScrollPercentage>
@@ -62,9 +61,8 @@ state changes, with the current value of `percentage` and `inView`.
 
 ```js
 import ScrollPercentage from 'react-scroll-percentage'
-
-<ScrollPercentage>
-  {(percentage, inView ) => (
+;<ScrollPercentage>
+  {(percentage, inView) => (
     <h2>{`Percentage scrolled: ${percentage.toPrecision(2)}%.`}</h2>
   )}
 </ScrollPercentage>
@@ -77,11 +75,10 @@ component. The child node will always be rendered.
 
 ```js
 import ScrollPercentage from 'react-scroll-percentage'
-
-<ScrollPercentage onChange={(percentage, inView) => console.log(percentage, inView)}>
-  <h2>
-    Plain children are always rendered. Use onChange to monitor state.
-  </h2>
+;<ScrollPercentage
+  onChange={(percentage, inView) => console.log(percentage, inView)}
+>
+  <h2>Plain children are always rendered. Use onChange to monitor state.</h2>
 </ScrollPercentage>
 ```
 
