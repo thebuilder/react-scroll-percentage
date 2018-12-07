@@ -13,8 +13,9 @@ type Props = {
 }
 
 // $FlowFixMe forwardRef is not known by Flow
-const Header = React.forwardRef((props: Props) => (
+const Header = React.forwardRef((props: Props, ref) => (
   <div
+    ref={ref}
     style={{
       display: 'flex',
       minHeight: '25vh',
