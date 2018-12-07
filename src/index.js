@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react' // eslint-disable-line no-unused-vars
-import Observer from 'react-intersection-observer'
+import InView from 'react-intersection-observer'
 import { unwatch, watch } from './scroll'
 import invariant from 'invariant'
 
@@ -124,7 +124,7 @@ class ScrollPercentage extends React.PureComponent<Props, State> {
     this.setState({ inView })
   }
 
-  handleNode = (observer: ?Observer) => (this.node = observer && observer.node)
+  handleNode = (observer: ?InView) => (this.node = observer && observer.node)
 
   handleScroll = () => {
     if (!this.node) return
@@ -169,13 +169,13 @@ class ScrollPercentage extends React.PureComponent<Props, State> {
 
   render() {
     return (
-      <Observer
+      <InView
         onChange={this.handleInView}
         threshold={this.props.threshold}
         ref={this.handleNode}
       >
         {this.renderInner}
-      </Observer>
+      </InView>
     )
   }
 }

@@ -5,7 +5,7 @@ exports[`Should render <ScrollPercentage /> 1`] = `
   tag="div"
   threshold={0}
 >
-  <Observer
+  <InView
     onChange={[Function]}
     threshold={0}
     triggerOnce={false}
@@ -15,7 +15,7 @@ exports[`Should render <ScrollPercentage /> 1`] = `
         inner
       </div>
     </div>
-  </Observer>
+  </InView>
 </ScrollPercentage>
 `;
 
@@ -25,7 +25,7 @@ exports[`Should render <ScrollPercentage /> with custom tag 1`] = `
   tag="span"
   threshold={0}
 >
-  <Observer
+  <InView
     onChange={[Function]}
     threshold={0}
     triggerOnce={false}
@@ -37,7 +37,7 @@ exports[`Should render <ScrollPercentage /> with custom tag 1`] = `
         inner
       </div>
     </span>
-  </Observer>
+  </InView>
 </ScrollPercentage>
 `;
 
@@ -46,7 +46,7 @@ exports[`Should render with child 1`] = `
   tag="div"
   threshold={0}
 >
-  <Observer
+  <InView
     onChange={[Function]}
     threshold={0}
     triggerOnce={false}
@@ -56,6 +56,6 @@ exports[`Should render with child 1`] = `
         Inner
       </div>
     </div>
-  </Observer>
+  </InView>
 </ScrollPercentage>
 `;
