@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "9"
+  - '9'
 cache: yarn
 script:
   - yarn test --coverage
@@ -12,7 +12,7 @@ deploy:
   skip_cleanup: true
   github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
   on:
-   branch: master
+    branch: master
 notifications:
   slack: in2:t4HfbJOtRL7uekgIPh2DUIKb
   email: false
