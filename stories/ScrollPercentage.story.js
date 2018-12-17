@@ -64,35 +64,35 @@ storiesOf('Scroll Percentage', module)
     <ScrollWrapper>
       <ScrollPercentage threshold={0}>
         {({ percentage }) => (
-          <Header threshold="0">
+          <Header threshold={0}>
             {`Percentage scrolled: ${calcPercentage(percentage)}%.`}
           </Header>
         )}
       </ScrollPercentage>
       <ScrollPercentage threshold={0.25}>
         {({ percentage }) => (
-          <Header style={{ background: 'slategrey' }} threshold="25">
+          <Header style={{ background: 'slategrey' }} threshold={25}>
             {`Percentage scrolled: ${calcPercentage(percentage)}%.`}
           </Header>
         )}
       </ScrollPercentage>
       <ScrollPercentage threshold={0.5}>
         {({ percentage }) => (
-          <Header style={{ background: 'plum' }} threshold="50">
+          <Header style={{ background: 'plum' }} threshold={50}>
             {`Percentage scrolled: ${calcPercentage(percentage)}%.`}
           </Header>
         )}
       </ScrollPercentage>
       <ScrollPercentage threshold={0.75}>
         {({ percentage }) => (
-          <Header style={{ background: 'lightseagreen' }} threshold="75">
+          <Header style={{ background: 'lightseagreen' }} threshold={75}>
             {`Percentage scrolled: ${calcPercentage(percentage)}%.`}
           </Header>
         )}
       </ScrollPercentage>
       <ScrollPercentage threshold={1}>
         {({ percentage }) => (
-          <Header style={{ background: 'cornflowerblue' }} threshold="100">
+          <Header style={{ background: 'cornflowerblue' }} threshold={100}>
             {`Percentage scrolled: ${calcPercentage(percentage)}%.`}
           </Header>
         )}
