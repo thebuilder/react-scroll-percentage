@@ -36,7 +36,7 @@
     "rollup:umd": "rollup -c --environment FORMAT:umd",
     "rollup:umd.min": "rollup -c --environment MINIFY,FORMAT:umd",
     "prepare": "npm run build",
-    "pretty": "prettier '**/*.{js,json,md}' --write",
+    "pretty": "prettier '**/*.{js,json,md,ts}' --write",
     "storybook": "start-storybook -p 9000",
     "test": "jest"
   },
