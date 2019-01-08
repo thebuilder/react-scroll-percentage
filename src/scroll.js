@@ -18,6 +18,7 @@ function update() {
 function start() {
   if (!isMonitoring) {
     window.addEventListener('scroll', onScroll)
+    window.addEventListener('resize', onScroll)
     isMonitoring = true
   }
 }
@@ -26,6 +27,7 @@ function stop() {
   if (isMonitoring) {
     watchers.clear()
     window.removeEventListener('scroll', onScroll)
+    window.removeEventListener('resize', onScroll)
     isMonitoring = false
   }
 }
