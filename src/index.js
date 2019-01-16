@@ -21,6 +21,8 @@ type Props = {
   onChange?: (percentage: number, inView: boolean) => void,
   /** Number between 0 and 1 indicating the the percentage that should be visible before triggering */
   threshold?: number,
+  /** Horizontal scroll mode (true/false) */
+  horizontal?: boolean,
   /** Element to use for wrapping element. Defaults to a `<div>` */
   tag?: string,
   /** Get a reference to the the inner DOM node */
@@ -54,10 +56,38 @@ class ScrollPercentage extends React.PureComponent<Props, State> {
     return global.parent ? global.parent.innerHeight : global.innerHeight || 0
   }
 
+  /**
+   * Get the correct viewport width for horizontal mode. If rendered inside an iframe, grab it from the parent
+   */
+  static viewportWidth(): number {
+    return global.parent ? global.parent.innerWidth : global.innerWidth || 0
+  }
+
   static calculatePercentage(
     bounds: ClientRect,
     threshold: number = 0,
+    horizontal: boolean = false,
   ): number {
+    // For horizontal mode use width and left/right for calculations
+    if (horizontal) {
+      const vw = ScrollPercentage.viewportWidth()
+      const offsetLeft = threshold * vw * 0.25
+      const offsetRight = threshold * vw * 0.25
+
+      return (
+        1 -
+        Math.max(
+          0,
+          Math.min(
+            1,
+            (bounds.left - offsetLeft) /
+              (vw + bounds.width - offsetRight - offsetLeft),
+          ),
+        )
+      )
+    }
+
+    // For vertical mode use height and top/bottom for calculations
     const vh = ScrollPercentage.viewportHeight()
     const offsetTop = threshold * vh * 0.25
     const offsetBottom = threshold * vh * 0.25
@@ -128,9 +158,13 @@ class ScrollPercentage extends React.PureComponent<Props, State> {
 
   handleScroll = () => {
     if (!this.node) return
-    const { threshold } = this.props
+    const { threshold, horizontal } = this.props
     const bounds = this.node.getBoundingClientRect()
-    const percentage = ScrollPercentage.calculatePercentage(bounds, threshold)
+    const percentage = ScrollPercentage.calculatePercentage(
+      bounds,
+      threshold,
+      horizontal,
+    )
 
     if (percentage !== this.state.percentage) {
       this.setState({
