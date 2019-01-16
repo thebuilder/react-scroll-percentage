@@ -41,13 +41,14 @@ npm install react-scroll-percentage --save
 
 The **`<ScrollPercentage />`** accepts the following props:
 
-| Name      | Type                                            | Default | Required | Description                                                                               |
-| --------- | ----------------------------------------------- | ------- | -------- | ----------------------------------------------------------------------------------------- |
-| tag       | Node                                            | 'div'   | true     | Element tag to use for the wrapping component                                             |
-| children  | ((percentage: number, inView: boolean) => Node) |         | true     | Children should be either a function or a node                                            |
-| threshold | Number                                          | 0       | false    | Number between 0 and 1 indicating the percentage that should be visible before triggering |
-| onChange  | (percentage: number, inView: boolean) => void   |         | false    | Call this function whenever the in view state changes                                     |
-| innerRef  | (element: ?HTMLElement) => void                 |         | false    | Get a reference to the inner DOM node                                                     |
+| Name       | Type                                            | Default | Required | Description                                                                               |
+| ---------- | ----------------------------------------------- | ------- | -------- | ----------------------------------------------------------------------------------------- |
+| tag        | Node                                            | 'div'   | true     | Element tag to use for the wrapping component                                             |
+| children   | ((percentage: number, inView: boolean) => Node) |         | true     | Children should be either a function or a node                                            |
+| threshold  | Number                                          | 0       | false    | Number between 0 and 1 indicating the percentage that should be visible before triggering |
+| horizontal | Bool                                            | 0       | false    | Set to true if you are scrolling horizontally                                             |
+| onChange   | (percentage: number, inView: boolean) => void   |         | false    | Call this function whenever the in view state changes                                     |
+| innerRef   | (element: ?HTMLElement) => void                 |         | false    | Get a reference to the inner DOM node                                                     |
 
 ## Example code
 
