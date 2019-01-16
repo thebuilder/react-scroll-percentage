@@ -12,10 +12,12 @@ global.IntersectionObserver = jest.fn(() => ({
 
 beforeEach(() => {
   global.innerHeight = 800
+  global.innerWidth = 800
 })
 
 afterEach(() => {
   global.innerHeight = 800
+  global.innerWidth = 800
 })
 
 const plainChild = () => <div>inner</div>
@@ -61,5 +63,21 @@ it('Should handle threshold', () => {
   // 525 is half of 1050 - the full bottom size
   expect(
     ScrollPercentage.calculatePercentage({ height: 250, bottom: 525 }, 0.1),
+  ).toEqual(0.5)
+})
+
+it('Should return a horizontal percentage', () => {
+  expect(
+    ScrollPercentage.calculatePercentage({ left: 0, width: 250 }, 0, true),
+  ).toEqual(1)
+  expect(
+    ScrollPercentage.calculatePercentage({ left: 1050, width: 250 }, 0, true),
+  ).toEqual(0)
+})
+
+it('Should handle a horizontal threshold', () => {
+  // 525 is half of 1050 - the full left size
+  expect(
+    ScrollPercentage.calculatePercentage({ width: 250, left: 525 }, 0.1, true),
   ).toEqual(0.5)
 })

@@ -178,6 +178,7 @@ class ScrollPercentage extends React.PureComponent<Props, State> {
       children,
       onChange,
       threshold,
+      horizontal,
       innerRef,
       tag,
       ...props
