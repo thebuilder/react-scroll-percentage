@@ -8668,10 +8668,10 @@ react-inspector@^2.3.0:
     is-dom "^1.0.9"
     prop-types "^15.6.1"
 
-react-intersection-observer@^6.4.0:
-  version "6.4.0"
-  resolved "https://registry.yarnpkg.com/react-intersection-observer/-/react-intersection-observer-6.4.0.tgz#bc9036977fe6640b30390784648d67262945c706"
-  integrity sha512-RY25DasjZNVtyQaNaa7elYCRAteTY07OY12AW8fnsx6srCJsCjsVJIhEnArWBuz3cMz1r+spiQyLhptKPM7zTw==
+react-intersection-observer@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/react-intersection-observer/-/react-intersection-observer-7.0.1.tgz#63754bc04dd87d7e5933867fcdd070cad72dab2b"
+  integrity sha512-mplF283EIC+7/Y/9E36afQKUUzlfEpNBOlRBIhavF5TR9eoEe/k3MCUEfkCa2PRz8nq5yPmrxSYn0bP2/w6v3A==
   dependencies:
     "@babel/runtime" "^7.2.0"
     invariant "^2.2.4"
