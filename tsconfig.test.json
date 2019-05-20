@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig",
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": ".",
+    "noEmit": false
+  },
+  "files": ["src/test-utils.ts"]
+}

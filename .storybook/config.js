@@ -1,23 +1,26 @@
 import React from 'react'
-import { configure, addDecorator } from '@storybook/react'
-import { withOptions } from '@storybook/addon-options'
-import pck from '../package.json'
+import { addParameters, configure } from '@storybook/react'
+import { create } from '@storybook/theming'
 import 'intersection-observer'
 import './base.css'
+import pck from '../package'
 
-addDecorator(
-  withOptions({
-    name: pck.name,
-    url: pck.repository ? pck.repository.url : null,
-    showAddonPanel: true,
-    addonPanelInRight: true,
-  }),
-)
+addParameters({
+  options: {
+    theme: create({
+      base: 'dark',
+      brandTitle: pck.name,
+      brandUrl: pck.repository.url,
+    }),
+    isFullscreen: false,
+    panelPosition: 'bottom',
+  },
+})
 
 /**
  * Use require.context to load dynamically: https://webpack.github.io/docs/context.html
  */
-const req = require.context('../stories', true, /story\.js$/)
+const req = require.context('../stories', true, /story\.tsx$/)
 
 function loadStories() {
   req.keys().forEach(req)

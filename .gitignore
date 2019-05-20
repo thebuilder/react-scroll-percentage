@@ -1,5 +1,6 @@
 .vscode
 .cache
+.docz
 node_modules
 reports
 example
@@ -15,3 +16,5 @@ npm-debug.log*
 .tern
 .tmp
 *.log
+test-utils.js
+test-utils.d.ts

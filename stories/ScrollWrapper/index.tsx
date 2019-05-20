@@ -1,20 +1,26 @@
-import React from 'react'
+import * as React from 'react'
+import { CSSProperties } from 'react'
 
-const style = {
+const style: CSSProperties = {
   height: '101vh',
   textAlign: 'center',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
-  backgroundColor: 'papayawhip',
+  backgroundColor: '#2d1176',
+  color: '#fff',
+}
+
+type Props = {
+  children: React.ReactNode
 }
 
 /**
  * ScrollWrapper directs the user to scroll the page to reveal it's children.
  * Use this on Modules that have scroll and/or observer triggers.
  */
-function ScrollWrapper({ children, ...props }) {
+function ScrollWrapper({ children, ...props }: Props) {
   return (
     <div {...props}>
       <section style={{ ...style }}>
