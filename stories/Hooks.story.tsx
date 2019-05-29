@@ -1,10 +1,9 @@
 import * as React from 'react'
 import { storiesOf } from '@storybook/react'
-import { useScrollPercentage } from '../src/useScrollPercentage'
+import { useScrollPercentage, ScrollPercentageOptions } from '../src'
 import ScrollWrapper from './ScrollWrapper/index'
 import { CSSProperties } from 'react'
 import { withKnobs, number } from '@storybook/addon-knobs'
-import { ScrollPercentageOptions } from '../src'
 
 type Props = {
   style?: Object
@@ -51,7 +50,6 @@ const HookComponent = ({ options, style, children, ...rest }: Props) => {
 
 storiesOf('useScrollPercentage hook', module)
   .addDecorator(withKnobs)
-
   .add('Basic', () => (
     <ScrollWrapper>
       <HookComponent />

@@ -33,12 +33,14 @@ export function useScrollPercentage(
     if (inView) {
       const root = options.root || window
       root.addEventListener('scroll', handleScroll, { passive: true })
+      root.addEventListener('resize', handleScroll)
 
       // Trigger a scroll update, so we set the initial scroll percentage
       handleScroll()
 
       return () => {
         root.removeEventListener('scroll', handleScroll)
+        root.removeEventListener('resize', handleScroll)
       }
     }
     return

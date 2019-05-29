@@ -76,12 +76,17 @@ export class ScrollPercentage extends React.Component<
   handleScroll = () => {
     if (!this.node) return
     const bounds = this.node.getBoundingClientRect()
-    const threshold = Array.isArray(this.props.threshold)
-      ? this.props.threshold[0]
-      : this.props.threshold
     const percentage = this.props.horizontal
-      ? calculateHorizontalPercentage(bounds, threshold, this.props.root)
-      : calculateVerticalPercentage(bounds, threshold, this.props.root)
+      ? calculateHorizontalPercentage(
+          bounds,
+          this.props.threshold,
+          this.props.root,
+        )
+      : calculateVerticalPercentage(
+          bounds,
+          this.props.threshold,
+          this.props.root,
+        )
 
     if (percentage !== this.state.percentage) {
       this.setState({
@@ -97,12 +102,16 @@ export class ScrollPercentage extends React.Component<
 
   handleRenderProps = ({ ref }: RenderProps) => {
     const { percentage, entry, inView } = this.state
-    return this.props.children({
-      percentage,
-      entry,
-      inView,
-      ref,
-    })
+    if (!isPlainChildren(this.props)) {
+      return this.props.children({
+        percentage,
+        entry,
+        inView,
+        ref,
+      })
+    }
+
+    return null
   }
 
   render() {

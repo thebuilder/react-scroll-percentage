@@ -6,8 +6,6 @@ export { useScrollPercentage } from './useScrollPercentage'
 
 export default ScrollPercentage
 
-type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
-
 interface RenderProps {
   percentage: number
   inView: boolean
@@ -19,7 +17,7 @@ export interface ScrollPercentageOptions extends IntersectionObserverInit {
   /** Number between 0 and 1 indicating the the percentage that should be visible before triggering */
   threshold?: number
   /** Horizontal scroll mode (true/false) */
-  horizontal?: boolean,
+  horizontal?: boolean
 }
 
 export interface ScrollPercentageProps extends ScrollPercentageOptions {
@@ -37,7 +35,8 @@ export interface ScrollPercentageProps extends ScrollPercentageOptions {
 /**
  * Types specific to the PlainChildren rendering of InView
  * */
-export type ScrollPercentagePlainChildrenProps = ScrollPercentageProps & {
+export interface ScrollPercentagePlainChildrenProps
+  extends ScrollPercentageOptions {
   children: React.ReactNode
 
   /**
@@ -53,5 +52,5 @@ export type ScrollPercentagePlainChildrenProps = ScrollPercentageProps & {
   tag?: React.ReactType<any>
 
   /** Call this function whenever the in view state changes */
-  onChange?: (percentage: number, entry: IntersectionObserverEntry) => void
-} & Omit<React.HTMLProps<HTMLElement>, 'onChange'>
+  onChange?: (percentage: number, entry?: IntersectionObserverEntry) => void
+}
