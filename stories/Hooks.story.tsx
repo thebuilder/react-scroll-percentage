@@ -1,57 +1,70 @@
-import * as React from 'react'
+import React, { useEffect } from 'react'
 import { storiesOf } from '@storybook/react'
-import { useScrollPercentage, ScrollPercentageOptions } from '../src'
-import ScrollWrapper from './ScrollWrapper/index'
-import { CSSProperties } from 'react'
-import { withKnobs, number } from '@storybook/addon-knobs'
+import { action } from '@storybook/addon-actions'
+import styled from 'styled-components'
+import { ScrollPercentageOptions, useScrollPercentage } from '../src'
+import { number, withKnobs } from '@storybook/addon-knobs'
+import ScrollWrapper from './ScrollWrapper'
 
 type Props = {
-  style?: Object
-  children?: React.ReactNode
   options?: ScrollPercentageOptions
-}
-
-const sharedStyle: CSSProperties = {
-  display: 'flex',
-  minHeight: '25vh',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  alignItems: 'center',
-  textAlign: 'center',
-  background: '#148bb4',
-  color: 'azure',
+  horizontal?: boolean
 }
 
 function getOptions(options: ScrollPercentageOptions = { threshold: 0 }) {
   const { threshold } = options
   return {
     ...options,
-    threshold:
-      options && Array.isArray(threshold)
-        ? threshold
-        : number('Threshold', (threshold as number) || 0, {
-            range: true,
-            min: 0,
-            max: 1,
-            step: 0.1,
-          }),
+    threshold: number('Threshold', (threshold as number) || 0, {
+      range: true,
+      min: 0,
+      max: 1,
+      step: 0.1,
+    }),
   }
 }
 
-const HookComponent = ({ options, style, children, ...rest }: Props) => {
-  const [ref, percentage] = useScrollPercentage(getOptions(options))
+const Content = styled.div`
+  background: #148bb4;
+  color: azure;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3em 1em;
+  min-width: 20vw;
+  font-size: 2rem;
+  flex: 1 1 auto;
+`
+
+const HookComponent = (props: Props) => {
+  const [ref, percentage] = useScrollPercentage(getOptions(props.options))
+
+  useEffect(() => {
+    const debounced = setTimeout(() => {
+      action('scroll')(percentage * 100)
+    }, 50)
+
+    return () => {
+      clearTimeout(debounced)
+    }
+  }, [percentage])
 
   return (
-    <div ref={ref} style={{ ...sharedStyle, ...style }} {...rest}>
-      <h2>{percentage}</h2>
-    </div>
+    <Content ref={ref}>
+      <code>Percentage: {Math.floor(percentage * 100)}%</code>
+    </Content>
   )
 }
 
-storiesOf('useScrollPercentage hook', module)
+storiesOf('useScrollPercentage', module)
   .addDecorator(withKnobs)
-  .add('Basic', () => (
+  .add('Example vertical', () => (
     <ScrollWrapper>
       <HookComponent />
+    </ScrollWrapper>
+  ))
+  .add('Example horizontal', () => (
+    <ScrollWrapper horizontal>
+      <HookComponent options={{ horizontal: true }} />
     </ScrollWrapper>
   ))

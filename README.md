@@ -84,19 +84,20 @@ import ScrollPercentage from 'react-scroll-percentage'
 </ScrollPercentage>
 ```
 
-## Polyfills
-
-### Intersection Observer
+## Intersection Observer
 
 [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)
 is the API is used to determine if an element is inside the viewport or not.
-Browser support is pretty good, but Safari is still missing support.
+[Browser support is pretty good](http://caniuse.com/#feat=intersectionobserver) -
+With
+[Safari adding support in 12.1](https://webkit.org/blog/8718/new-webkit-features-in-safari-12-1/),
+all major browsers now support Intersection Observers natively.
 
-> [Can i use intersectionobserver?](https://caniuse.com/#feat=intersectionobserver)
+### Polyfill
 
 You can import the
-[polyfill](https://www.npmjs.com/package/react-intersection-observer) directly
-or use a service like [polyfill.io](https://polyfill.io/v2/docs/) to add it when
+[polyfill](https://www.npmjs.com/package/intersection-observer) directly or use
+a service like [polyfill.io](https://polyfill.io/v2/docs/) to add it when
 needed.
 
 ```sh
@@ -115,34 +116,12 @@ the Polyfill only if needed. A basic implementation could look something like
 this:
 
 ```js
-loadPolyfills()
-  .then(() => /* Render React application now that your Polyfills are ready */)
-
 /**
-* Do feature detection, to figure out which polyfills needs to be imported.
-**/
-function loadPolyfills() {
-  const polyfills = []
-
-  if (!supportsIntersectionObserver()) {
-    polyfills.push(import('intersection-observer'))
+ * Do feature detection, to figure out which polyfills needs to be imported.
+ **/
+async function loadPolyfills() {
+  if (typeof window.IntersectionObserver === 'undefined') {
+    await import('intersection-observer')
   }
-
-  return Promise.all(polyfills)
-}
-
-function supportsIntersectionObserver() {
-  return (
-    'IntersectionObserver' in global &&
-    'IntersectionObserverEntry' in global &&
-    'intersectionRatio' in IntersectionObserverEntry.prototype
-  )
 }
 ```
-
-### requestAnimationFrame
-
-To optimize scroll updates,
-[requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame)
-is used. Make sure your target browsers support it, or include the required
-polyfill.

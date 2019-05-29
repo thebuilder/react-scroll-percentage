@@ -1,9 +1,9 @@
-// @flow
 import * as React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { ScrollPercentage } from '../src'
 import ScrollWrapper from './ScrollWrapper'
+import Status from './Status'
 
 const calcPercentage = (percentage: number) => Math.floor(percentage * 100)
 
@@ -11,6 +11,7 @@ type Props = {
   style?: Object
   children?: React.ReactNode
   threshold?: number
+  percentage?: number
 }
 
 // $FlowFixMe forwardRef is not known by Flow
@@ -29,6 +30,9 @@ const Header = React.forwardRef<HTMLDivElement, Props>((props, ref) => (
       ...props.style,
     }}
   >
+    {props.percentage !== undefined ? (
+      <Status percentage={props.percentage} />
+    ) : null}
     {props.threshold ? (
       <h2
         style={{ marginTop: 0 }}
@@ -43,9 +47,10 @@ storiesOf('Scroll Percentage', module)
     <ScrollWrapper>
       <ScrollPercentage>
         {({ percentage, ref }) => (
-          <Header ref={ref}>{`Percentage scrolled: ${calcPercentage(
-            percentage,
-          )}%.`}</Header>
+          <Header
+            ref={ref}
+            percentage={percentage}
+          >{`Percentage scrolled: ${calcPercentage(percentage)}%.`}</Header>
         )}
       </ScrollPercentage>
     </ScrollWrapper>
@@ -57,6 +62,7 @@ storiesOf('Scroll Percentage', module)
           <Header
             ref={ref}
             style={{ height: '150vh' }}
+            percentage={percentage}
           >{`Percentage scrolled: ${calcPercentage(percentage)}%.`}</Header>
         )}
       </ScrollPercentage>
