@@ -1,5 +1,5 @@
-import { ScrollPercentage } from './ScrollPercentage'
 import * as React from 'react'
+import { ScrollPercentage } from './ScrollPercentage'
 
 export { ScrollPercentage } from './ScrollPercentage'
 export { useScrollPercentage } from './useScrollPercentage'
@@ -44,12 +44,6 @@ export interface ScrollPercentagePlainChildrenProps
    * @default `'div'`
    */
   as?: React.ReactType<any>
-
-  /**
-   * Element tag to use for the wrapping component
-   * @deprecated Replace with the 'as' prop
-   */
-  tag?: React.ReactType<any>
 
   /** Call this function whenever the in view state changes */
   onChange?: (percentage: number, entry?: IntersectionObserverEntry) => void

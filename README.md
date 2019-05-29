@@ -6,9 +6,9 @@
 [![npm](https://img.shields.io/npm/v/react-scroll-percentage.svg)](https://www.npmjs.com/package/react-scroll-percentage)
 
 React component that reports the current scroll percentage of a element inside
-the viewport. It uses [React Intersection
-Observer](https://github.com/thebuilder/react-intersection-observer) to only
-report the percentage when the element is inside the viewport.
+the viewport. It uses
+[React Intersection Observer](https://github.com/thebuilder/react-intersection-observer)
+to only report the percentage when the element is inside the viewport.
 
 ```js
 import ScrollPercentage from 'react-scroll-percentage'
@@ -57,8 +57,9 @@ The **`<ScrollPercentage />`** accepts the following props:
 The basic usage pass a function as the child. It will be called whenever the
 state changes, with the current value of `percentage` and `inView`.
 
-> Note that <ScrollPercentage> will still render a wrapping element (default is a `<div>`).
-> You can change to element by setting `tag`, and any excess props like `className` will be passed to the element
+> Note that <ScrollPercentage> will still render a wrapping element (default is
+> a `<div>`). You can change to element by setting `tag`, and any excess props
+> like `className` will be passed to the element
 
 ```js
 import ScrollPercentage from 'react-scroll-percentage'
@@ -88,13 +89,14 @@ import ScrollPercentage from 'react-scroll-percentage'
 ### Intersection Observer
 
 [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)
-is the API is used to determine if an element is inside the viewport or not. Browser support is pretty good, but Safari is still missing support.
+is the API is used to determine if an element is inside the viewport or not.
+Browser support is pretty good, but Safari is still missing support.
 
 > [Can i use intersectionobserver?](https://caniuse.com/#feat=intersectionobserver)
 
 You can import the
-[polyfill](https://www.npmjs.com/package/react-intersection-observer) directly or use
-a service like [polyfill.io](https://polyfill.io/v2/docs/) to add it when
+[polyfill](https://www.npmjs.com/package/react-intersection-observer) directly
+or use a service like [polyfill.io](https://polyfill.io/v2/docs/) to add it when
 needed.
 
 ```sh
@@ -107,9 +109,10 @@ Then import it in your app:
 import 'intersection-observer'
 ```
 
-If you are using Webpack (or similar) you could use [dynamic
-imports](https://webpack.js.org/api/module-methods/#import-), to load the
-Polyfill only if needed. A basic implementation could look something like this:
+If you are using Webpack (or similar) you could use
+[dynamic imports](https://webpack.js.org/api/module-methods/#import-), to load
+the Polyfill only if needed. A basic implementation could look something like
+this:
 
 ```js
 loadPolyfills()

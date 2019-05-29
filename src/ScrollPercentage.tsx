@@ -1,6 +1,5 @@
 import * as React from 'react'
 import InView from 'react-intersection-observer'
-import { watchScroll } from './scroll'
 import {
   calculateHorizontalPercentage,
   calculateVerticalPercentage,
@@ -51,6 +50,7 @@ export class ScrollPercentage extends React.Component<
   }
 
   node?: Element | null = undefined
+  monitoring: boolean = false
 
   componentDidUpdate(
     prevProps: ScrollPercentageProps | ScrollPercentagePlainChildrenProps,
@@ -64,13 +64,37 @@ export class ScrollPercentage extends React.Component<
       this.props.onChange(this.state.percentage, this.state.entry)
     }
 
+    if (prevProps.root !== this.props.root) {
+      if (this.monitoring) {
+        this.monitorScroll(false, prevProps.root)
+        this.monitorScroll(this.state.inView)
+      }
+    }
+
     if (prevState.inView !== this.state.inView) {
-      watchScroll(this.handleScroll, this.state.inView)
+      this.monitorScroll(this.state.inView, prevProps.root)
     }
   }
 
   componentWillUnmount(): void {
-    watchScroll(this.handleScroll, false)
+    this.monitorScroll(false)
+  }
+
+  monitorScroll(enabled: boolean, target?: Element | Window | null) {
+    const root = target || this.props.root || window
+
+    if (enabled) {
+      if (this.monitoring) return
+      root.addEventListener('scroll', this.handleScroll, { passive: true })
+      root.addEventListener('resize', this.handleScroll)
+      this.handleScroll()
+      this.monitoring = true
+    } else {
+      if (!this.monitoring) return
+      root.removeEventListener('scroll', this.handleScroll)
+      root.removeEventListener('resize', this.handleScroll)
+      this.monitoring = false
+    }
   }
 
   handleScroll = () => {
@@ -87,7 +111,6 @@ export class ScrollPercentage extends React.Component<
           this.props.threshold,
           this.props.root,
         )
-
     if (percentage !== this.state.percentage) {
       this.setState({
         percentage,
