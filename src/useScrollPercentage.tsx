@@ -4,17 +4,16 @@ import {
   calculateVerticalPercentage,
   calculateHorizontalPercentage,
 } from './utils'
+import { ScrollPercentageOptions } from './index'
 
 type HookResponse = [((node?: Element | null) => void), number]
 
 /**
  * Create a hook that reports the percentage an element is scrolled into the viewport.
- * @param options {IntersectionObserverInit}
- * @param horizontal {boolean}
+ * @param options {ScrollPercentageOptions}
  */
 export function useScrollPercentage(
-  options: IntersectionObserverInit = {},
-  horizontal: boolean = false,
+  options: ScrollPercentageOptions = {},
 ): HookResponse {
   const [ref, inView, entry] = useInView(options)
   const target = entry && entry.target
@@ -23,16 +22,12 @@ export function useScrollPercentage(
   const handleScroll = useCallback(() => {
     if (!target) return
     const bounds = target.getBoundingClientRect()
-    const threshold = Array.isArray(options.threshold)
-      ? options.threshold[0]
-      : options.threshold
-
-    const percentage = horizontal
-      ? calculateHorizontalPercentage(bounds, threshold, options.root)
-      : calculateVerticalPercentage(bounds, threshold, options.root)
+    const percentage = options.horizontal
+      ? calculateHorizontalPercentage(bounds, options.threshold, options.root)
+      : calculateVerticalPercentage(bounds, options.threshold, options.root)
 
     setPercentage(percentage)
-  }, [target, options.threshold, options.root, horizontal])
+  }, [target, options.threshold, options.root, options.horizontal])
 
   useEffect(() => {
     if (inView) {

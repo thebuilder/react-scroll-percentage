@@ -1,18 +1,28 @@
 import * as React from 'react'
-import InView, {
-  IntersectionObserverProps,
-  PlainChildrenProps,
-} from 'react-intersection-observer'
+import InView from 'react-intersection-observer'
+import { watchScroll } from './scroll'
+import {
+  calculateHorizontalPercentage,
+  calculateVerticalPercentage,
+} from './utils'
+import {
+  ScrollPercentagePlainChildrenProps,
+  ScrollPercentageProps,
+} from './index'
 
 type State = {
   percentage: number
-  inView: boolean,
+  inView: boolean
   entry?: IntersectionObserverEntry
 }
 
+type RenderProps = {
+  ref: React.RefObject<any> | ((node?: Element | null) => void)
+}
+
 function isPlainChildren(
-  props: IntersectionObserverProps | PlainChildrenProps,
-): props is PlainChildrenProps {
+  props: ScrollPercentageProps | ScrollPercentagePlainChildrenProps,
+): props is ScrollPercentagePlainChildrenProps {
   return typeof props.children !== 'function'
 }
 
@@ -26,7 +36,7 @@ function isPlainChildren(
  </ScrollPercentage>
  */
 export class ScrollPercentage extends React.Component<
-  IntersectionObserverProps | PlainChildrenProps,
+  ScrollPercentageProps | ScrollPercentagePlainChildrenProps,
   State
 > {
   static displayName = 'ScrollPercentage'
@@ -40,21 +50,66 @@ export class ScrollPercentage extends React.Component<
     entry: undefined,
   }
 
-  handleInView = (inView:boolean, entry: IntersectionObserverEntry) => {
+  node?: Element | null = undefined
+
+  componentDidUpdate(
+    prevProps: ScrollPercentageProps | ScrollPercentagePlainChildrenProps,
+    prevState: State,
+  ) {
+    if (
+      this.props.onChange &&
+      (prevState.percentage !== this.state.percentage ||
+        prevState.inView !== this.state.inView)
+    ) {
+      this.props.onChange(this.state.percentage, this.state.entry)
+    }
+
+    if (prevState.inView !== this.state.inView) {
+      watchScroll(this.handleScroll, this.state.inView)
+    }
+  }
+
+  componentWillUnmount(): void {
+    watchScroll(this.handleScroll, false)
+  }
+
+  handleScroll = () => {
+    if (!this.node) return
+    const bounds = this.node.getBoundingClientRect()
+    const threshold = Array.isArray(this.props.threshold)
+      ? this.props.threshold[0]
+      : this.props.threshold
+    const percentage = this.props.horizontal
+      ? calculateHorizontalPercentage(bounds, threshold, this.props.root)
+      : calculateVerticalPercentage(bounds, threshold, this.props.root)
+
+    if (percentage !== this.state.percentage) {
+      this.setState({
+        percentage,
+      })
+    }
+  }
+
+  handleInView = (inView: boolean, entry: IntersectionObserverEntry) => {
+    this.node = entry.target
     this.setState({ entry, inView })
   }
 
-  render() {
-    const { percentage, entry } = this.state
+  handleRenderProps = ({ ref }: RenderProps) => {
+    const { percentage, entry, inView } = this.state
+    return this.props.children({
+      percentage,
+      entry,
+      inView,
+      ref,
+    })
+  }
 
+  render() {
     return (
-      <InView
-        {...this.props}
-        onChange={this.handleInView}
-        ref={this.handleNode}
-      >
+      <InView onChange={this.handleInView}>
         {!isPlainChildren(this.props)
-          ? this.props.children({ percentage, entry, ref: this.handleNode })
+          ? this.handleRenderProps
           : this.props.children}
       </InView>
     )

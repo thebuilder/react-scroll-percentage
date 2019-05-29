@@ -3,13 +3,13 @@ import { storiesOf } from '@storybook/react'
 import { useScrollPercentage } from '../src/useScrollPercentage'
 import ScrollWrapper from './ScrollWrapper/index'
 import { CSSProperties } from 'react'
-import { withKnobs, number, boolean } from '@storybook/addon-knobs'
-import { IntersectionOptions } from 'react-intersection-observer/dist/typings/types'
+import { withKnobs, number } from '@storybook/addon-knobs'
+import { ScrollPercentageOptions } from '../src'
 
 type Props = {
   style?: Object
   children?: React.ReactNode
-  options?: IntersectionOptions
+  options?: ScrollPercentageOptions
 }
 
 const sharedStyle: CSSProperties = {
@@ -23,10 +23,8 @@ const sharedStyle: CSSProperties = {
   color: 'azure',
 }
 
-function getOptions(
-  options: IntersectionOptions = { threshold: 0, triggerOnce: false },
-) {
-  const { threshold, triggerOnce } = options
+function getOptions(options: ScrollPercentageOptions = { threshold: 0 }) {
+  const { threshold } = options
   return {
     ...options,
     threshold:
@@ -38,7 +36,6 @@ function getOptions(
             max: 1,
             step: 0.1,
           }),
-    triggerOnce: boolean('Trigger once', triggerOnce || false),
   }
 }
 
@@ -52,7 +49,7 @@ const HookComponent = ({ options, style, children, ...rest }: Props) => {
   )
 }
 
-storiesOf('useInView hook', module)
+storiesOf('useScrollPercentage hook', module)
   .addDecorator(withKnobs)
 
   .add('Basic', () => (

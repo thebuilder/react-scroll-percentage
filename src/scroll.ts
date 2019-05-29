@@ -1,9 +1,8 @@
-// @flow
 let isMonitoring: boolean = false
 let isScrolling: boolean = false
 let watchers: Set<Function> = new Set()
 
-function onScroll(e) {
+function onScroll() {
   if (!isScrolling) {
     isScrolling = true
     requestAnimationFrame(update)
@@ -32,16 +31,12 @@ function stop() {
   }
 }
 
-export function watch(cb: Function) {
-  if (!isMonitoring) start()
-  watchers.add(cb)
-}
-
-export function unwatch(cb: Function) {
-  watchers.delete(cb)
-  if (!watchers.size) stop()
-}
-
-export function destroy() {
-  stop()
+export function watchScroll(callback: Function, enabled: boolean) {
+  if (enabled) {
+    if (!isMonitoring) start()
+    watchers.add(callback)
+  } else {
+    watchers.delete(callback)
+    if (!watchers.size) stop()
+  }
 }
