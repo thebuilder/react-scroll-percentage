@@ -1,79 +1,64 @@
-import resolve from 'rollup-plugin-node-resolve'
+/* eslint-disable import/no-extraneous-dependencies */
+import path from 'path'
 import babel from 'rollup-plugin-babel'
+import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
 import replace from 'rollup-plugin-replace'
-import { uglify } from 'rollup-plugin-uglify'
+import { terser } from 'rollup-plugin-terser'
 import pkg from './package.json'
 
-const minify = process.env.MINIFY
-const format = process.env.FORMAT
-const es = format === 'es'
-const umd = format === 'umd'
-const cjs = format === 'cjs'
-
-let output
-
-if (es) {
-  output = { file: pkg.module, format: 'es' }
-} else if (umd) {
-  if (minify) {
-    output = {
-      file: `dist/react-scroll-percentage.umd.min.js`,
-      format: 'umd',
-    }
-  } else {
-    output = { file: `dist/react-scroll-percentage.umd.js`, format: 'umd' }
-  }
-} else if (cjs) {
-  output = { file: pkg.main, format: 'cjs' }
-} else if (format) {
-  throw new Error(`invalid format specified: "${format}".`)
-} else {
-  throw new Error('no format specified. --environment FORMAT:xxx')
+const root = process.platform === 'win32' ? path.resolve('/') : '/'
+const external = id => !id.startsWith('.') && !id.startsWith(root)
+const extensions = ['.js', '.jsx', '.ts', '.tsx']
+const globals = {
+  react: 'React',
 }
+
+const getBabelOptions = ({ useESModules }) => ({
+  exclude: '**/node_modules/**',
+  runtimeHelpers: true,
+  extensions,
+  include: ['src/**/*'],
+  presets: ['@babel/preset-typescript'],
+  plugins: [['@babel/transform-runtime', { regenerator: false, useESModules }]],
+})
 
 export default [
   {
-    input: 'src/index.js',
-    output: {
-      name: 'ReactScrollPercentage',
-      globals: {
-        react: 'React',
-      },
-      ...output,
-    },
-    external: umd
-      ? Object.keys(pkg.peerDependencies || {})
-      : [
-          ...Object.keys(pkg.dependencies || {}),
-          ...Object.keys(pkg.peerDependencies || {}),
-        ],
+    input: './src/index.tsx',
+    output: { file: pkg.module, format: 'esm', exports: 'named' },
+    external,
     plugins: [
-      resolve({
-        jsnext: true,
-        main: true,
-      }),
-      commonjs({ include: 'node_modules/**' }),
-      babel({
-        exclude: 'node_modules/**',
-        externalHelpers: false,
-        presets: [
-          [
-            '@babel/preset-env',
-            {
-              loose: true,
-            },
-          ],
-        ],
-      }),
-      umd
-        ? replace({
-            'process.env.NODE_ENV': JSON.stringify(
-              minify ? 'production' : 'development',
-            ),
-          })
-        : null,
-      minify ? uglify() : null,
-    ].filter(Boolean),
+      resolve({ extensions }),
+      babel(getBabelOptions({ useESModules: true })),
+    ],
+  },
+  {
+    input: './src/index.tsx',
+    output: { file: pkg.main, format: 'cjs', exports: 'named' },
+    external,
+    plugins: [
+      resolve({ extensions }),
+      babel(getBabelOptions({ useESModules: false })),
+    ],
+  },
+  {
+    input: './src/index.tsx',
+    output: {
+      file: pkg.unpkg,
+      format: 'umd',
+      name: 'ReactScrollPercentage',
+      globals,
+      exports: 'named',
+      sourcemap: true,
+    },
+    external: Object.keys(globals),
+    plugins: [
+      resolve({ extensions }),
+      replace({ 'process.env.NODE_ENV': JSON.stringify('production') }),
+      babel(getBabelOptions({ useESModules: true })),
+      commonjs({ include: '**/node_modules/**' }),
+      terser(),
+    ],
   },
 ]
