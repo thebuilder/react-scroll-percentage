@@ -4,9 +4,7 @@ import {
   calculateVerticalPercentage,
   calculateHorizontalPercentage,
 } from './utils'
-import { ScrollPercentageOptions } from './index'
-
-type HookResponse = [((node?: Element | null) => void), number, boolean]
+import { ScrollPercentageHookResponse, ScrollPercentageOptions } from './index'
 
 /**
  * Create a hook that reports the percentage an element is scrolled into the viewport.
@@ -14,7 +12,7 @@ type HookResponse = [((node?: Element | null) => void), number, boolean]
  */
 export function useScrollPercentage(
   options: ScrollPercentageOptions = {},
-): HookResponse {
+): ScrollPercentageHookResponse {
   const [ref, inView, entry] = useInView(options)
   const target = entry && entry.target
   const [percentage, setPercentage] = useState(0)
@@ -46,5 +44,5 @@ export function useScrollPercentage(
     return
   }, [inView, options.root, handleScroll])
 
-  return [ref, percentage, inView]
+  return [ref, percentage, entry]
 }

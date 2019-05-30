@@ -48,3 +48,9 @@ export interface ScrollPercentagePlainChildrenProps
   /** Call this function whenever the in view state changes */
   onChange?: (percentage: number, entry?: IntersectionObserverEntry) => void
 }
+
+export type ScrollPercentageHookResponse = [
+  ((node?: Element | null) => void),
+  number,
+  IntersectionObserverEntry | undefined
+]
