@@ -12,16 +12,16 @@
 [![styled with prettier][prettier-svg]][prettier-url]
 
 React component that reports the current scroll percentage of a element inside
-the viewport. It uses
-[React Intersection Observer](https://github.com/thebuilder/react-intersection-observer)
-to only report the percentage when the element is inside the viewport.
+the viewport. Contains both a [Hooks](#hooks), [render props](#render-props) and
+[plain children](#plain-children) implementation.
 
 ## Features
 
 - 🎣 **Hooks or Component API** - With `useCrollPercentage` it's easier than
   ever to monitor elements
-- ⚡️ **Optimized performance** - Uses `IntersectionObservers` to only update
-  when elements are inside the viewport
+- ⚡️ **Optimized performance** - Uses
+  [React Intersection Observer](https://github.com/thebuilder/react-intersection-observer)
+  to only update when elements are inside the viewport
 - 🌳 **Tree-shakeable** - Only include the parts you use
 
 ## Installation

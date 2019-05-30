@@ -47,7 +47,7 @@ export default [
     output: {
       file: pkg.unpkg,
       format: 'umd',
-      name: 'ReactIntersectionObserver',
+      name: 'ReactScrollPercentage',
       globals,
       exports: 'named',
       sourcemap: true,

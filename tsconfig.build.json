@@ -6,6 +6,5 @@
     "outDir": "dist",
     "noEmit": false
   },
-  "include": ["src/**/*"],
-  "files": ["src/test-utils.ts"]
+  "include": ["src/**/*"]
 }
