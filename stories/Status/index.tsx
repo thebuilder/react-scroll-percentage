@@ -1,6 +1,6 @@
 import { CSSProperties, default as React } from 'react'
 
-type Props = { percentage: number }
+type Props = { percentage: number; style?: object }
 
 const calcPercentage = (percentage: number) => Math.floor(percentage * 100)
 
@@ -23,9 +23,9 @@ const percentageStyle: CSSProperties = {
   fontSize: '1.25rem',
 }
 
-function Status({ percentage }: Props) {
+function Status({ percentage, style = {} }: Props) {
   return (
-    <div style={statusElement}>
+    <div style={{ ...statusElement, ...style }}>
       <span style={percentageStyle}>{calcPercentage(percentage)}%</span>
     </div>
   )

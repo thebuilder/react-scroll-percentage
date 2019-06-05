@@ -14,6 +14,10 @@ interface RenderProps {
 }
 
 export interface ScrollPercentageOptions extends IntersectionObserverInit {
+  /** Boolean to enable controlled scrolling mode */
+  controlledScroll?: boolean
+  /** Number to pass the current scrollY in controlled scrolling mode */
+  controlledScrollY?: number
   /** Number between 0 and 1 indicating the the percentage that should be visible before triggering */
   threshold?: number
   /** Horizontal scroll mode (true/false) */

@@ -42,9 +42,9 @@
     "build:lib": "rollup -c",
     "build:ts": "tsc -p tsconfig.build.json",
     "build:copy": "node scripts/build-copy.js",
-    "dev": "concurrently -k -r 'jest --watch' 'yarn run storybook'",
+    "dev": "concurrently -k -r 'jest --watch' 'npm run storybook'",
     "lint": "eslint . --ext js,ts,tsx",
-    "preversion": "yarn build",
+    "preversion": "npm build",
     "pretty": "prettier '**/*.{js,ts,tsx,md,,yml,html}' --write",
     "storybook": "start-storybook -p 9000",
     "storybook:build": "build-storybook --output-dir example",
@@ -53,11 +53,6 @@
   "np": {
     "yarn": false,
     "contents": "dist"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "tsc && lint-staged"
-    }
   },
   "lint-staged": {
     "*.{js,,css,md,ts,tsx}": [

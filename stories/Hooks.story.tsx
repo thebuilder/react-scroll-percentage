@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { ScrollPercentageOptions, useScrollPercentage } from '../src'
 import { number, withKnobs } from '@storybook/addon-knobs'
 import ScrollWrapper from './ScrollWrapper'
+import VirtualScrollWrapper from './VirtualScrollWrapper'
 
 type Props = {
   options?: ScrollPercentageOptions
@@ -67,4 +68,13 @@ storiesOf('useScrollPercentage', module)
     <ScrollWrapper horizontal>
       <HookComponent options={{ horizontal: true }} />
     </ScrollWrapper>
+  ))
+  .add('Example virtual', () => (
+    <VirtualScrollWrapper>
+      {(scrollY: number = 0) => (
+        <HookComponent
+          options={{ controlledScroll: true, controlledScrollY: scrollY }}
+        />
+      )}
+    </VirtualScrollWrapper>
   ))

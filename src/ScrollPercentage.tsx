@@ -40,6 +40,8 @@ export class ScrollPercentage extends React.Component<
 > {
   static displayName = 'ScrollPercentage'
   static defaultProps = {
+    controlledScroll: false,
+    controlledScrollY: 0,
     threshold: 0,
   }
 
@@ -64,6 +66,9 @@ export class ScrollPercentage extends React.Component<
       this.props.onChange(this.state.percentage, this.state.entry)
     }
 
+    if (this.props.controlledScroll)
+      return this.handleControlledScroll(prevProps.controlledScrollY)
+
     if (prevProps.root !== this.props.root) {
       if (this.monitoring) {
         this.monitorScroll(false, prevProps.root)
@@ -77,6 +82,7 @@ export class ScrollPercentage extends React.Component<
   }
 
   componentWillUnmount(): void {
+    if (this.props.controlledScroll) return
     this.monitorScroll(false)
   }
 
@@ -97,17 +103,32 @@ export class ScrollPercentage extends React.Component<
     }
   }
 
+  handleControlledScroll(prevControlledScrollY?: Number | boolean): void {
+    if (!this.node || prevControlledScrollY === this.props.controlledScrollY)
+      return
+
+    const percentage = calculateVerticalPercentage(
+      this.node,
+      this.props.threshold,
+      this.props.root,
+      this.props.controlledScrollY,
+    )
+
+    if (percentage === this.state.percentage) return
+
+    this.setState({ percentage })
+  }
+
   handleScroll = () => {
     if (!this.node) return
-    const bounds = this.node.getBoundingClientRect()
     const percentage = this.props.horizontal
       ? calculateHorizontalPercentage(
-          bounds,
+          this.node,
           this.props.threshold,
           this.props.root,
         )
       : calculateVerticalPercentage(
-          bounds,
+          this.node,
           this.props.threshold,
           this.props.root,
         )

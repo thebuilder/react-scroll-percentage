@@ -19,17 +19,36 @@ export function useScrollPercentage(
 
   const handleScroll = useCallback(() => {
     if (!target) return
-    const bounds = target.getBoundingClientRect()
     const percentage = options.horizontal
-      ? calculateHorizontalPercentage(bounds, options.threshold, options.root)
-      : calculateVerticalPercentage(bounds, options.threshold, options.root)
+      ? calculateHorizontalPercentage(target, options.threshold, options.root)
+      : calculateVerticalPercentage(target, options.threshold, options.root)
 
     setPercentage(percentage)
   }, [target, options.threshold, options.root, options.horizontal])
 
+  const handleControlledScroll = useCallback(() => {
+    if (!target) return
+
+    const percentage = calculateVerticalPercentage(
+      target,
+      options.threshold,
+      options.root,
+      options.controlledScrollY,
+    )
+
+    setPercentage(percentage)
+
+    return
+  }, [target, options.threshold, options.root, options.controlledScrollY])
+
   useEffect(() => {
     if (inView) {
       const root = options.root || window
+
+      if (options.controlledScroll) {
+        return handleControlledScroll()
+      }
+
       root.addEventListener('scroll', handleScroll, { passive: true })
       root.addEventListener('resize', handleScroll)
 
@@ -42,7 +61,13 @@ export function useScrollPercentage(
       }
     }
     return
-  }, [inView, options.root, handleScroll])
+  }, [
+    inView,
+    options.root,
+    handleScroll,
+    options.controlledScroll,
+    handleControlledScroll,
+  ])
 
   return [ref, percentage, entry]
 }

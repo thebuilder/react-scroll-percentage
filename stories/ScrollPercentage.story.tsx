@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { ScrollPercentage } from '../src'
 import ScrollWrapper from './ScrollWrapper'
+import VirtualScrollWrapper from './VirtualScrollWrapper'
 import Status from './Status'
 
 const calcPercentage = (percentage: number) => Math.floor(percentage * 100)
@@ -123,4 +124,23 @@ storiesOf('Scroll Percentage', module)
         </Header>
       </ScrollPercentage>
     </ScrollWrapper>
+  ))
+  .add('Virtual scroll', () => (
+    <VirtualScrollWrapper>
+      {scrollY => (
+        <ScrollPercentage controlledScroll={true} controlledScrollY={scrollY}>
+          {({ percentage, ref }) => (
+            <Header ref={ref}>
+              <Status
+                percentage={percentage}
+                style={{
+                  transform: `translate3d( 0, ${scrollY}px, 0)`,
+                }}
+              />
+              {`Percentage scrolled: ${calcPercentage(percentage)}%.`}
+            </Header>
+          )}
+        </ScrollPercentage>
+      )}
+    </VirtualScrollWrapper>
   ))
