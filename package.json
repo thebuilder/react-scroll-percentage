@@ -54,6 +54,11 @@
     "yarn": false,
     "contents": "dist"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsc && lint-staged"
+    }
+  },
   "lint-staged": {
     "*.{js,,css,md,ts,tsx}": [
       "prettier --write",

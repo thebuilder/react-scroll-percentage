@@ -71,7 +71,7 @@ storiesOf('useScrollPercentage', module)
   ))
   .add('Example virtual', () => (
     <VirtualScrollWrapper>
-      {(scrollY: number = 0) => (
+      {({ scrollY: number = 0 }) => (
         <HookComponent
           options={{ controlledScroll: true, controlledScrollY: scrollY }}
         />

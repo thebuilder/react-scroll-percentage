@@ -6,7 +6,7 @@
     "jsx": "react",
     "moduleResolution": "node",
     "noImplicitReturns": true,
-    "strict": true,
+    "strict": false,
     "strictFunctionTypes": true,
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,

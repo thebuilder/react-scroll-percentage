@@ -1,6 +1,5 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import { NumberTypeAnnotation } from '@babel/types'
 
 const ScrollElement = styled.div`
   height: 100vh;
@@ -32,7 +31,7 @@ type State = {
 }
 
 interface Props {
-  horizontal: boolean
+  horizontal?: boolean
   children: (fields: RenderProps) => React.ReactNode
 }
 
@@ -47,8 +46,10 @@ class VirtualScrollWrapper extends React.PureComponent<Props, State> {
     scrollY: 0,
   }
 
-  onWheel = ({ deltaY = 0 }: WheelEvent) => {
+  onWheel = (e: any): void => {
     if (!this.scrollElement) return
+
+    const { deltaY = 0 } = e
     const scrollY = this.state.scrollY + deltaY
 
     return this.setState({
@@ -70,7 +71,7 @@ class VirtualScrollWrapper extends React.PureComponent<Props, State> {
             </span>
           </h1>
         </ScrollBlock>
-        {this.props.children(this.state.scrollY)}
+        {this.props.children({ scrollY: this.state.scrollY })}
         <ScrollBlock>
           <h1>
             Scroll left{' '}
@@ -96,7 +97,7 @@ class VirtualScrollWrapper extends React.PureComponent<Props, State> {
               </span>
             </h1>
           </ScrollBlock>
-          {this.props.children(this.state.scrollY)}
+          {this.props.children({ scrollY: this.state.scrollY })}
           <ScrollBlock>
             <h1>
               Scroll up{' '}

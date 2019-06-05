@@ -127,7 +127,7 @@ storiesOf('Scroll Percentage', module)
   ))
   .add('Virtual scroll', () => (
     <VirtualScrollWrapper>
-      {scrollY => (
+      {({ scrollY }) => (
         <ScrollPercentage controlledScroll={true} controlledScrollY={scrollY}>
           {({ percentage, ref }) => (
             <Header ref={ref}>

@@ -23,7 +23,7 @@ function getScrollPercentage(
  */
 
 export function calculateVerticalPercentage(
-  node: HTMLDivElement,
+  node: HTMLDivElement | Element | any,
   threshold: number = 0,
   root: Window | Element | null | undefined = window,
   scrollY?: number | boolean | null | undefined,
@@ -47,7 +47,7 @@ export function calculateVerticalPercentage(
 }
 
 export function calculateHorizontalPercentage(
-  node: HTMLDivElement,
+  node: HTMLDivElement | Element | any,
   threshold: number = 0,
   root: Window | Element | null | undefined = window,
   scrollX?: number | boolean | null | undefined,
