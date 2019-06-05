@@ -1,10 +1,10 @@
+import { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
-import { useCallback, useEffect, useState } from 'react'
+import { ScrollPercentageHookResponse, ScrollPercentageOptions } from './index'
 import {
   calculateVerticalPercentage,
   calculateHorizontalPercentage,
 } from './utils'
-import { ScrollPercentageHookResponse, ScrollPercentageOptions } from './index'
 
 /**
  * Create a hook that reports the percentage an element is scrolled into the viewport.
@@ -14,21 +14,25 @@ export function useScrollPercentage(
   options: ScrollPercentageOptions = {},
 ): ScrollPercentageHookResponse {
   const [ref, inView, entry] = useInView(options)
-  const target = entry && entry.target
   const [percentage, setPercentage] = useState(0)
-
-  const handleScroll = useCallback(() => {
-    if (!target) return
-    const bounds = target.getBoundingClientRect()
-    const percentage = options.horizontal
-      ? calculateHorizontalPercentage(bounds, options.threshold, options.root)
-      : calculateVerticalPercentage(bounds, options.threshold, options.root)
-
-    setPercentage(percentage)
-  }, [target, options.threshold, options.root, options.horizontal])
+  const target = entry && entry.target
 
   useEffect(() => {
     if (inView) {
+      const handleScroll = () => {
+        if (!target) return
+        const bounds = target.getBoundingClientRect()
+        const percentage = options.horizontal
+          ? calculateHorizontalPercentage(
+              bounds,
+              options.threshold,
+              options.root,
+            )
+          : calculateVerticalPercentage(bounds, options.threshold, options.root)
+
+        setPercentage(percentage)
+      }
+
       const root = options.root || window
       root.addEventListener('scroll', handleScroll, { passive: true })
       root.addEventListener('resize', handleScroll)
@@ -42,7 +46,7 @@ export function useScrollPercentage(
       }
     }
     return
-  }, [inView, options.root, handleScroll])
+  }, [inView, options.root, options.horizontal, options.threshold, target])
 
   return [ref, percentage, entry]
 }
