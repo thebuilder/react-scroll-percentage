@@ -1,13 +1,12 @@
 {
   "name": "react-scroll-percentage",
-  "version": "4.0.5",
+  "version": "4.0.6",
   "description": "Monitor the scroll percentage of a component inside the viewport, using the IntersectionObserver API.",
   "main": "react-scroll-percentage.cjs.js",
   "jsnext:main": "react-scroll-percentage.esm.js",
   "module": "react-scroll-percentage.esm.js",
   "unpkg": "react-scroll-percentage.umd.min.js",
   "author": "Daniel Schmidt",
-  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/thebuilder/react-scroll-percentage"
@@ -45,16 +44,13 @@
     "dev": "concurrently -k -r 'jest --watch' 'yarn run storybook'",
     "lint": "eslint . --ext js,ts,tsx",
     "release": "release-it",
-    "preversion": "yarn build",
+    "postversion": "yarn build",
     "pretty": "prettier '**/*.{js,ts,tsx,md,,yml,html}' --write",
     "storybook": "start-storybook -p 9000",
     "storybook:build": "build-storybook --output-dir example",
     "test": "jest"
   },
   "release-it": {
-    "hooks": {
-      "before:npm:release": "cd dist"
-    },
     "npm": {
       "publish": true,
       "publishPath": "dist"
