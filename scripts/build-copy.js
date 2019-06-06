@@ -20,7 +20,7 @@ const packageFieldsToRemove = [
   'jest',
   'eslintConfig',
   'eslintIgnore',
-  'np',
+  'release-it',
 ]
 
 packageFieldsToRemove.forEach(field => {

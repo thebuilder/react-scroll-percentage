@@ -44,15 +44,18 @@
     "build:copy": "node scripts/build-copy.js",
     "dev": "concurrently -k -r 'jest --watch' 'yarn run storybook'",
     "lint": "eslint . --ext js,ts,tsx",
+    "release": "release-it",
     "preversion": "yarn build",
     "pretty": "prettier '**/*.{js,ts,tsx,md,,yml,html}' --write",
     "storybook": "start-storybook -p 9000",
     "storybook:build": "build-storybook --output-dir example",
     "test": "jest"
   },
-  "np": {
-    "yarn": false,
-    "contents": "dist"
+  "release-it": {
+    "npm": {
+      "publish": true,
+      "publishPath": "dist"
+    }
   },
   "husky": {
     "hooks": {
@@ -152,6 +155,7 @@
     "react-dom": "^16.8.3",
     "react-hooks-testing-library": "^0.5.1",
     "react-test-renderer": "^16.8.3",
+    "release-it": "^12.3.0",
     "rollup": "^1.14.0",
     "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-commonjs": "^10.0.0",
