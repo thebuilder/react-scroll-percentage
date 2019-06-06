@@ -52,6 +52,9 @@
     "test": "jest"
   },
   "release-it": {
+    "hooks": {
+      "before:npm:release": "cd dist"
+    },
     "npm": {
       "publish": true,
       "publishPath": "dist"
