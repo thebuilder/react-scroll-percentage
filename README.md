@@ -17,7 +17,7 @@ the viewport. Contains both a [Hooks](#hooks), [render props](#render-props) and
 
 ## Features
 
-- 🎣 **Hooks or Component API** - With `useCrollPercentage` it's easier than
+- 🎣 **Hooks or Component API** - With `useScrollPercentage` it's easier than
   ever to monitor elements
 - ⚡️ **Optimized performance** - Uses
   [React Intersection Observer](https://github.com/thebuilder/react-intersection-observer)
