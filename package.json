@@ -150,7 +150,7 @@
     "prettier": "^1.17.1",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
-    "react-hooks-testing-library": "^0.5.1",
+    "react-hooks-testing-library": "^0.6.0",
     "react-test-renderer": "^16.8.3",
     "rollup": "^1.14.0",
     "rollup-plugin-babel": "^4.3.2",
