@@ -1,4 +1,4 @@
-import { renderHook } from 'react-hooks-testing-library'
+import { renderHook } from '@testing-library/react-hooks'
 import { useScrollPercentage } from '../src/useScrollPercentage'
 
 it('should execute the useScrollPercentage hook', () => {
