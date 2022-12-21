@@ -2,14 +2,9 @@
 
 [![Version Badge][npm-version-svg]][package-url]
 [![GZipped size][npm-minzip-svg]][bundlephobia-url]
-[![Build Status][travis-svg]][travis-url]
-[![Coverage Statu][coveralls-svg]][coveralls-url]
-[![dependency status][deps-svg]][deps-url]
 [![dev dependency status][dev-deps-svg]][dev-deps-url]
 [![License][license-image]][license-url]
 [![Downloads][downloads-image]][downloads-url]
-[![Greenkeeper badge][greenkeeper-svg]][greenkeeper-url]
-[![styled with prettier][prettier-svg]][prettier-url]
 
 React component that reports the current scroll percentage of a element inside
 the viewport. Contains both a [Hooks](#hooks), [render props](#render-props) and
@@ -202,12 +197,6 @@ async function loadPolyfills() {
 [npm-version-svg]: https://img.shields.io/npm/v/react-scroll-percentage.svg
 [npm-minzip-svg]: https://img.shields.io/bundlephobia/minzip/react.svg
 [bundlephobia-url]: https://bundlephobia.com/result?p=react-scroll-percentage
-[travis-svg]: https://travis-ci.org/thebuilder/react-scroll-percentage.svg
-[travis-url]: https://travis-ci.org/thebuilder/react-scroll-percentage
-[coveralls-svg]:
-  https://coveralls.io/repos/github/thebuilder/react-scroll-percentage/badge.svg?branch=master
-[coveralls-url]:
-  https://coveralls.io/github/thebuilder/react-scroll-percentage?branch=master
 [deps-svg]: https://david-dm.org/thebuilder/react-scroll-percentage.svg
 [deps-url]: https://david-dm.org/thebuilder/react-scroll-percentage
 [dev-deps-svg]:
@@ -218,8 +207,3 @@ async function loadPolyfills() {
 [license-url]: LICENSE
 [downloads-image]: http://img.shields.io/npm/dm/react-scroll-percentage.svg
 [downloads-url]: http://npm-stat.com/charts.html?package=react-scroll-percentage
-[greenkeeper-svg]:
-  https://badges.greenkeeper.io/thebuilder/react-scroll-percentage.svg
-[greenkeeper-url]: https://greenkeeper.io/
-[prettier-svg]: https://img.shields.io/badge/styled_with-prettier-ff69b4.svg
-[prettier-url]: https://github.com/prettier/prettier
